@@ -44,12 +44,12 @@ WorldDojo
 <h1 class="animate-rise text-foreground [animation-delay:80ms]"><span class="hero-name caret">WorldDojo</span> <span class="hero-subtitle">A Comprehensive Benchmark for Interactive Embodied World Models in Robotic Manipulation</span></h1>
 </div>
 <div class="title-input">
-  <img class="title-arm" src="assets/hero-arm.svg" width="199" height="205" alt=""/>
-  <div class="title-spec title-state"><header>State <small>o₀</small></header><img src="assets/hero-observation.png" width="512" height="256" alt="Initial fixed and wrist camera observations of the red mug task"/></div>
+  <img draggable="false" class="title-arm" src="assets/hero-arm.svg" width="199" height="205" alt=""/>
+  <div class="title-spec title-state"><header>State <small>o₀</small></header><img draggable="false" src="assets/hero-observation.png" width="512" height="256" alt="Initial fixed and wrist camera observations of the red mug task"/></div>
   <div class="title-spec title-actions"><header>Actions <small>aₜ</small></header><p>Δ position · Δ rotation · grip</p></div>
 </div>
 <div class="title-output">
-  <img class="title-axes" src="assets/hero-axes.svg" width="140" height="110" alt=""/>
+  <img draggable="false" class="title-axes" src="assets/hero-axes.svg" width="140" height="110" alt=""/>
   <div class="title-spec"><header>World model</header><p>ô<sub>t+1</sub> = f<sub>θ</sub>(o<sub>≤t</sub>, a<sub>t</sub>)</p></div>
   <div class="title-spec title-rollout"><header>Rollout <button type="button" aria-label="Play the BWM rollout">Play</button></header>
     <video muted loop playsinline preload="metadata" src="assets/hero-rollout.mp4" poster="assets/hero-observation.png" width="512" height="256" aria-label="BWM prediction for LIBERO OG000540"></video>
