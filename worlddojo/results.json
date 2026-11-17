@@ -1,0 +1,1259 @@
+{
+  "source": "Table 2 of the supplied WorldDojo manuscript",
+  "levels": [
+    "L0",
+    "L1",
+    "L2"
+  ],
+  "training": {
+    "demo": "LIBERO Demo.",
+    "worlddojo_l0": "WorldDojo L0"
+  },
+  "columns": [
+    {
+      "id": "SC_OSCR",
+      "suite": "spatial_consistency",
+      "suiteCode": "SC",
+      "suiteLabel": "Spatial Consistency",
+      "metric": "OSCR",
+      "label": "OSCR (%)",
+      "direction": "higher"
+    },
+    {
+      "id": "SC_NPE",
+      "suite": "spatial_consistency",
+      "suiteCode": "SC",
+      "suiteLabel": "Spatial Consistency",
+      "metric": "NPE",
+      "label": "NPE \u00d7100",
+      "direction": "lower"
+    },
+    {
+      "id": "HM_OSCR",
+      "suite": "horizon_memory",
+      "suiteCode": "HM",
+      "suiteLabel": "Horizon Memory",
+      "metric": "OSCR",
+      "label": "OSCR (%)",
+      "direction": "higher"
+    },
+    {
+      "id": "HM_ORR",
+      "suite": "horizon_memory",
+      "suiteCode": "HM",
+      "suiteLabel": "Horizon Memory",
+      "metric": "ORR",
+      "label": "ORR (%)",
+      "direction": "higher"
+    },
+    {
+      "id": "OG_OSCR",
+      "suite": "object_generalization",
+      "suiteCode": "OG",
+      "suiteLabel": "Object Generalization",
+      "metric": "OSCR",
+      "label": "OSCR (%)",
+      "direction": "higher"
+    },
+    {
+      "id": "OG_ECR",
+      "suite": "object_generalization",
+      "suiteCode": "OG",
+      "suiteLabel": "Object Generalization",
+      "metric": "ECR",
+      "label": "ECR (%)",
+      "direction": "higher"
+    },
+    {
+      "id": "CR_OSCR",
+      "suite": "causal_response",
+      "suiteCode": "CR",
+      "suiteLabel": "Causal Response",
+      "metric": "OSCR",
+      "label": "OSCR (%)",
+      "direction": "higher"
+    },
+    {
+      "id": "CR_ECR",
+      "suite": "causal_response",
+      "suiteCode": "CR",
+      "suiteLabel": "Causal Response",
+      "metric": "ECR",
+      "label": "ECR (%)",
+      "direction": "higher"
+    }
+  ],
+  "rows": [
+    {
+      "model": "IRASim",
+      "training": "demo",
+      "level": "L0",
+      "scores": {
+        "SC_OSCR": {
+          "value": 18.0,
+          "display": "18.0"
+        },
+        "SC_NPE": {
+          "value": 0.2349,
+          "display": "23.5"
+        },
+        "HM_OSCR": {
+          "value": 34.5,
+          "display": "34.5"
+        },
+        "HM_ORR": {
+          "value": 5.5,
+          "display": "5.5"
+        },
+        "OG_OSCR": {
+          "value": 27.9,
+          "display": "27.9"
+        },
+        "OG_ECR": {
+          "value": 46.0,
+          "display": "46.0"
+        },
+        "CR_OSCR": {
+          "value": 22.5,
+          "display": "22.5"
+        },
+        "CR_ECR": {
+          "value": 48.5,
+          "display": "48.5"
+        }
+      }
+    },
+    {
+      "model": "IRASim",
+      "training": "worlddojo_l0",
+      "level": "L0",
+      "scores": {
+        "SC_OSCR": {
+          "value": 28.0,
+          "display": "28.0"
+        },
+        "SC_NPE": {
+          "value": 0.0187,
+          "display": "1.9"
+        },
+        "HM_OSCR": {
+          "value": 52.5,
+          "display": "52.5"
+        },
+        "HM_ORR": {
+          "value": 40.8,
+          "display": "40.8"
+        },
+        "OG_OSCR": {
+          "value": 36.1,
+          "display": "36.1"
+        },
+        "OG_ECR": {
+          "value": 30.5,
+          "display": "30.5"
+        },
+        "CR_OSCR": {
+          "value": 40.8,
+          "display": "40.8"
+        },
+        "CR_ECR": {
+          "value": 55.0,
+          "display": "55.0"
+        }
+      }
+    },
+    {
+      "model": "IRASim",
+      "training": "demo",
+      "level": "L1",
+      "scores": {
+        "SC_OSCR": {
+          "value": 5.0,
+          "display": "5.0"
+        },
+        "SC_NPE": {
+          "value": 0.4114,
+          "display": "41.1"
+        },
+        "HM_OSCR": {
+          "value": 21.3,
+          "display": "21.3"
+        },
+        "HM_ORR": {
+          "value": 1.8,
+          "display": "1.8"
+        },
+        "OG_OSCR": {
+          "value": 7.6,
+          "display": "7.6"
+        },
+        "OG_ECR": {
+          "value": 25.5,
+          "display": "25.5"
+        },
+        "CR_OSCR": {
+          "value": 14.4,
+          "display": "14.4"
+        },
+        "CR_ECR": {
+          "value": 1.5,
+          "display": "1.5"
+        }
+      }
+    },
+    {
+      "model": "IRASim",
+      "training": "worlddojo_l0",
+      "level": "L1",
+      "scores": {
+        "SC_OSCR": {
+          "value": 9.3,
+          "display": "9.3"
+        },
+        "SC_NPE": {
+          "value": 0.2504,
+          "display": "25.0"
+        },
+        "HM_OSCR": {
+          "value": 44.8,
+          "display": "44.8"
+        },
+        "HM_ORR": {
+          "value": 15.0,
+          "display": "15.0"
+        },
+        "OG_OSCR": {
+          "value": 14.1,
+          "display": "14.1"
+        },
+        "OG_ECR": {
+          "value": 16.0,
+          "display": "16.0"
+        },
+        "CR_OSCR": {
+          "value": 24.3,
+          "display": "24.3"
+        },
+        "CR_ECR": {
+          "value": 7.5,
+          "display": "7.5"
+        }
+      }
+    },
+    {
+      "model": "IRASim",
+      "training": "demo",
+      "level": "L2",
+      "scores": {
+        "SC_OSCR": {
+          "value": 3.3,
+          "display": "3.3"
+        },
+        "SC_NPE": {
+          "value": 0.4976,
+          "display": "49.8"
+        },
+        "HM_OSCR": {
+          "value": 13.0,
+          "display": "13.0"
+        },
+        "HM_ORR": {
+          "value": 3.2,
+          "display": "3.2"
+        },
+        "OG_OSCR": {
+          "value": 5.2,
+          "display": "5.2"
+        },
+        "OG_ECR": {
+          "value": 14.0,
+          "display": "14.0"
+        },
+        "CR_OSCR": {
+          "value": 3.1,
+          "display": "3.1"
+        },
+        "CR_ECR": {
+          "value": 1.5,
+          "display": "1.5"
+        }
+      }
+    },
+    {
+      "model": "IRASim",
+      "training": "worlddojo_l0",
+      "level": "L2",
+      "scores": {
+        "SC_OSCR": {
+          "value": 7.2,
+          "display": "7.2"
+        },
+        "SC_NPE": {
+          "value": 0.3335,
+          "display": "33.4"
+        },
+        "HM_OSCR": {
+          "value": 29.2,
+          "display": "29.2"
+        },
+        "HM_ORR": {
+          "value": 1.7,
+          "display": "1.7"
+        },
+        "OG_OSCR": {
+          "value": 11.9,
+          "display": "11.9"
+        },
+        "OG_ECR": {
+          "value": 10.5,
+          "display": "10.5"
+        },
+        "CR_OSCR": {
+          "value": 13.8,
+          "display": "13.8"
+        },
+        "CR_ECR": {
+          "value": 2.0,
+          "display": "2.0"
+        }
+      }
+    },
+    {
+      "model": "Ctrl-World",
+      "training": "demo",
+      "level": "L0",
+      "scores": {
+        "SC_OSCR": {
+          "value": 20.4,
+          "display": "20.4"
+        },
+        "SC_NPE": {
+          "value": 0.0308,
+          "display": "3.1"
+        },
+        "HM_OSCR": {
+          "value": 50.7,
+          "display": "50.7"
+        },
+        "HM_ORR": {
+          "value": 64.9,
+          "display": "64.9"
+        },
+        "OG_OSCR": {
+          "value": 40.2,
+          "display": "40.2"
+        },
+        "OG_ECR": {
+          "value": 53.0,
+          "display": "53.0"
+        },
+        "CR_OSCR": {
+          "value": 29.3,
+          "display": "29.3"
+        },
+        "CR_ECR": {
+          "value": 46.5,
+          "display": "46.5"
+        }
+      }
+    },
+    {
+      "model": "Ctrl-World",
+      "training": "worlddojo_l0",
+      "level": "L0",
+      "scores": {
+        "SC_OSCR": {
+          "value": 32.4,
+          "display": "32.4"
+        },
+        "SC_NPE": {
+          "value": 0.0068,
+          "display": "0.7"
+        },
+        "HM_OSCR": {
+          "value": 66.4,
+          "display": "66.4"
+        },
+        "HM_ORR": {
+          "value": 93.4,
+          "display": "93.4"
+        },
+        "OG_OSCR": {
+          "value": 48.2,
+          "display": "48.2"
+        },
+        "OG_ECR": {
+          "value": 72.0,
+          "display": "72.0"
+        },
+        "CR_OSCR": {
+          "value": 53.1,
+          "display": "53.1"
+        },
+        "CR_ECR": {
+          "value": 80.5,
+          "display": "80.5"
+        }
+      }
+    },
+    {
+      "model": "Ctrl-World",
+      "training": "demo",
+      "level": "L1",
+      "scores": {
+        "SC_OSCR": {
+          "value": 12.9,
+          "display": "12.9"
+        },
+        "SC_NPE": {
+          "value": 0.1223,
+          "display": "12.2"
+        },
+        "HM_OSCR": {
+          "value": 46.4,
+          "display": "46.4"
+        },
+        "HM_ORR": {
+          "value": 45.3,
+          "display": "45.3"
+        },
+        "OG_OSCR": {
+          "value": 23.7,
+          "display": "23.7"
+        },
+        "OG_ECR": {
+          "value": 27.0,
+          "display": "27.0"
+        },
+        "CR_OSCR": {
+          "value": 21.7,
+          "display": "21.7"
+        },
+        "CR_ECR": {
+          "value": 10.5,
+          "display": "10.5"
+        }
+      }
+    },
+    {
+      "model": "Ctrl-World",
+      "training": "worlddojo_l0",
+      "level": "L1",
+      "scores": {
+        "SC_OSCR": {
+          "value": 18.0,
+          "display": "18.0"
+        },
+        "SC_NPE": {
+          "value": 0.1273,
+          "display": "12.7"
+        },
+        "HM_OSCR": {
+          "value": 55.3,
+          "display": "55.3"
+        },
+        "HM_ORR": {
+          "value": 78.2,
+          "display": "78.2"
+        },
+        "OG_OSCR": {
+          "value": 28.2,
+          "display": "28.2"
+        },
+        "OG_ECR": {
+          "value": 56.5,
+          "display": "56.5"
+        },
+        "CR_OSCR": {
+          "value": 27.5,
+          "display": "27.5"
+        },
+        "CR_ECR": {
+          "value": 31.5,
+          "display": "31.5"
+        }
+      }
+    },
+    {
+      "model": "Ctrl-World",
+      "training": "demo",
+      "level": "L2",
+      "scores": {
+        "SC_OSCR": {
+          "value": 9.6,
+          "display": "9.6"
+        },
+        "SC_NPE": {
+          "value": 0.2138,
+          "display": "21.4"
+        },
+        "HM_OSCR": {
+          "value": 27.7,
+          "display": "27.7"
+        },
+        "HM_ORR": {
+          "value": 11.4,
+          "display": "11.4"
+        },
+        "OG_OSCR": {
+          "value": 17.0,
+          "display": "17.0"
+        },
+        "OG_ECR": {
+          "value": 14.5,
+          "display": "14.5"
+        },
+        "CR_OSCR": {
+          "value": 11.3,
+          "display": "11.3"
+        },
+        "CR_ECR": {
+          "value": 7.0,
+          "display": "7.0"
+        }
+      }
+    },
+    {
+      "model": "Ctrl-World",
+      "training": "worlddojo_l0",
+      "level": "L2",
+      "scores": {
+        "SC_OSCR": {
+          "value": 11.8,
+          "display": "11.8"
+        },
+        "SC_NPE": {
+          "value": 0.2223,
+          "display": "22.2"
+        },
+        "HM_OSCR": {
+          "value": 33.2,
+          "display": "33.2"
+        },
+        "HM_ORR": {
+          "value": 24.1,
+          "display": "24.1"
+        },
+        "OG_OSCR": {
+          "value": 23.2,
+          "display": "23.2"
+        },
+        "OG_ECR": {
+          "value": 25.5,
+          "display": "25.5"
+        },
+        "CR_OSCR": {
+          "value": 16.9,
+          "display": "16.9"
+        },
+        "CR_ECR": {
+          "value": 17.0,
+          "display": "17.0"
+        }
+      }
+    },
+    {
+      "model": "DreamDojo",
+      "training": "demo",
+      "level": "L0",
+      "scores": {
+        "SC_OSCR": {
+          "value": 46.1,
+          "display": "46.1"
+        },
+        "SC_NPE": {
+          "value": 0.0063,
+          "display": "0.6"
+        },
+        "HM_OSCR": {
+          "value": 63.8,
+          "display": "63.8"
+        },
+        "HM_ORR": {
+          "value": 49.0,
+          "display": "49.0"
+        },
+        "OG_OSCR": {
+          "value": 45.2,
+          "display": "45.2"
+        },
+        "OG_ECR": {
+          "value": 59.0,
+          "display": "59.0"
+        },
+        "CR_OSCR": {
+          "value": 41.8,
+          "display": "41.8"
+        },
+        "CR_ECR": {
+          "value": 56.5,
+          "display": "56.5"
+        }
+      }
+    },
+    {
+      "model": "DreamDojo",
+      "training": "worlddojo_l0",
+      "level": "L0",
+      "scores": {
+        "SC_OSCR": {
+          "value": 53.2,
+          "display": "53.2"
+        },
+        "SC_NPE": {
+          "value": 0.0026,
+          "display": "0.3"
+        },
+        "HM_OSCR": {
+          "value": 73.5,
+          "display": "73.5"
+        },
+        "HM_ORR": {
+          "value": 70.2,
+          "display": "70.2"
+        },
+        "OG_OSCR": {
+          "value": 52.5,
+          "display": "52.5"
+        },
+        "OG_ECR": {
+          "value": 83.5,
+          "display": "83.5"
+        },
+        "CR_OSCR": {
+          "value": 57.9,
+          "display": "57.9"
+        },
+        "CR_ECR": {
+          "value": 84.5,
+          "display": "84.5"
+        }
+      }
+    },
+    {
+      "model": "DreamDojo",
+      "training": "demo",
+      "level": "L1",
+      "scores": {
+        "SC_OSCR": {
+          "value": 27.8,
+          "display": "27.8"
+        },
+        "SC_NPE": {
+          "value": 0.0893,
+          "display": "8.9"
+        },
+        "HM_OSCR": {
+          "value": 49.1,
+          "display": "49.1"
+        },
+        "HM_ORR": {
+          "value": 27.2,
+          "display": "27.2"
+        },
+        "OG_OSCR": {
+          "value": 36.1,
+          "display": "36.1"
+        },
+        "OG_ECR": {
+          "value": 44.5,
+          "display": "44.5"
+        },
+        "CR_OSCR": {
+          "value": 32.1,
+          "display": "32.1"
+        },
+        "CR_ECR": {
+          "value": 34.5,
+          "display": "34.5"
+        }
+      }
+    },
+    {
+      "model": "DreamDojo",
+      "training": "worlddojo_l0",
+      "level": "L1",
+      "scores": {
+        "SC_OSCR": {
+          "value": 34.7,
+          "display": "34.7"
+        },
+        "SC_NPE": {
+          "value": 0.0756,
+          "display": "7.6"
+        },
+        "HM_OSCR": {
+          "value": 54.0,
+          "display": "54.0"
+        },
+        "HM_ORR": {
+          "value": 37.1,
+          "display": "37.1"
+        },
+        "OG_OSCR": {
+          "value": 39.5,
+          "display": "39.5"
+        },
+        "OG_ECR": {
+          "value": 59.0,
+          "display": "59.0"
+        },
+        "CR_OSCR": {
+          "value": 41.6,
+          "display": "41.6"
+        },
+        "CR_ECR": {
+          "value": 37.5,
+          "display": "37.5"
+        }
+      }
+    },
+    {
+      "model": "DreamDojo",
+      "training": "demo",
+      "level": "L2",
+      "scores": {
+        "SC_OSCR": {
+          "value": 19.1,
+          "display": "19.1"
+        },
+        "SC_NPE": {
+          "value": 0.1888,
+          "display": "18.9"
+        },
+        "HM_OSCR": {
+          "value": 37.3,
+          "display": "37.3"
+        },
+        "HM_ORR": {
+          "value": 14.6,
+          "display": "14.6"
+        },
+        "OG_OSCR": {
+          "value": 32.2,
+          "display": "32.2"
+        },
+        "OG_ECR": {
+          "value": 24.0,
+          "display": "24.0"
+        },
+        "CR_OSCR": {
+          "value": 20.2,
+          "display": "20.2"
+        },
+        "CR_ECR": {
+          "value": 9.0,
+          "display": "9.0"
+        }
+      }
+    },
+    {
+      "model": "DreamDojo",
+      "training": "worlddojo_l0",
+      "level": "L2",
+      "scores": {
+        "SC_OSCR": {
+          "value": 25.4,
+          "display": "25.4"
+        },
+        "SC_NPE": {
+          "value": 0.1491,
+          "display": "14.9"
+        },
+        "HM_OSCR": {
+          "value": 39.4,
+          "display": "39.4"
+        },
+        "HM_ORR": {
+          "value": 8.1,
+          "display": "8.1"
+        },
+        "OG_OSCR": {
+          "value": 37.7,
+          "display": "37.7"
+        },
+        "OG_ECR": {
+          "value": 34.5,
+          "display": "34.5"
+        },
+        "CR_OSCR": {
+          "value": 26.4,
+          "display": "26.4"
+        },
+        "CR_ECR": {
+          "value": 18.0,
+          "display": "18.0"
+        }
+      }
+    },
+    {
+      "model": "Cosmos3-Nano",
+      "training": "demo",
+      "level": "L0",
+      "scores": {
+        "SC_OSCR": {
+          "value": 37.1,
+          "display": "37.1"
+        },
+        "SC_NPE": {
+          "value": 0.0068,
+          "display": "0.7"
+        },
+        "HM_OSCR": {
+          "value": 55.5,
+          "display": "55.5"
+        },
+        "HM_ORR": {
+          "value": 48.1,
+          "display": "48.1"
+        },
+        "OG_OSCR": {
+          "value": 34.1,
+          "display": "34.1"
+        },
+        "OG_ECR": {
+          "value": 65.0,
+          "display": "65.0"
+        },
+        "CR_OSCR": {
+          "value": 39.0,
+          "display": "39.0"
+        },
+        "CR_ECR": {
+          "value": 55.0,
+          "display": "55.0"
+        }
+      }
+    },
+    {
+      "model": "Cosmos3-Nano",
+      "training": "worlddojo_l0",
+      "level": "L0",
+      "scores": {
+        "SC_OSCR": {
+          "value": 69.9,
+          "display": "69.9"
+        },
+        "SC_NPE": {
+          "value": 0.0027,
+          "display": "0.3"
+        },
+        "HM_OSCR": {
+          "value": 77.4,
+          "display": "77.4"
+        },
+        "HM_ORR": {
+          "value": 81.7,
+          "display": "81.7"
+        },
+        "OG_OSCR": {
+          "value": 54.4,
+          "display": "54.4"
+        },
+        "OG_ECR": {
+          "value": 82.5,
+          "display": "82.5"
+        },
+        "CR_OSCR": {
+          "value": 69.7,
+          "display": "69.7"
+        },
+        "CR_ECR": {
+          "value": 85.5,
+          "display": "85.5"
+        }
+      }
+    },
+    {
+      "model": "Cosmos3-Nano",
+      "training": "demo",
+      "level": "L1",
+      "scores": {
+        "SC_OSCR": {
+          "value": 26.8,
+          "display": "26.8"
+        },
+        "SC_NPE": {
+          "value": 0.1203,
+          "display": "12.0"
+        },
+        "HM_OSCR": {
+          "value": 41.3,
+          "display": "41.3"
+        },
+        "HM_ORR": {
+          "value": 33.6,
+          "display": "33.6"
+        },
+        "OG_OSCR": {
+          "value": 32.2,
+          "display": "32.2"
+        },
+        "OG_ECR": {
+          "value": 47.5,
+          "display": "47.5"
+        },
+        "CR_OSCR": {
+          "value": 31.4,
+          "display": "31.4"
+        },
+        "CR_ECR": {
+          "value": 16.5,
+          "display": "16.5"
+        }
+      }
+    },
+    {
+      "model": "Cosmos3-Nano",
+      "training": "worlddojo_l0",
+      "level": "L1",
+      "scores": {
+        "SC_OSCR": {
+          "value": 44.0,
+          "display": "44.0"
+        },
+        "SC_NPE": {
+          "value": 0.0648,
+          "display": "6.5"
+        },
+        "HM_OSCR": {
+          "value": 57.4,
+          "display": "57.4"
+        },
+        "HM_ORR": {
+          "value": 59.3,
+          "display": "59.3"
+        },
+        "OG_OSCR": {
+          "value": 42.7,
+          "display": "42.7"
+        },
+        "OG_ECR": {
+          "value": 59.5,
+          "display": "59.5"
+        },
+        "CR_OSCR": {
+          "value": 48.9,
+          "display": "48.9"
+        },
+        "CR_ECR": {
+          "value": 37.0,
+          "display": "37.0"
+        }
+      }
+    },
+    {
+      "model": "Cosmos3-Nano",
+      "training": "demo",
+      "level": "L2",
+      "scores": {
+        "SC_OSCR": {
+          "value": 19.5,
+          "display": "19.5"
+        },
+        "SC_NPE": {
+          "value": 0.2651,
+          "display": "26.5"
+        },
+        "HM_OSCR": {
+          "value": 31.6,
+          "display": "31.6"
+        },
+        "HM_ORR": {
+          "value": 13.4,
+          "display": "13.4"
+        },
+        "OG_OSCR": {
+          "value": 26.0,
+          "display": "26.0"
+        },
+        "OG_ECR": {
+          "value": 26.0,
+          "display": "26.0"
+        },
+        "CR_OSCR": {
+          "value": 19.6,
+          "display": "19.6"
+        },
+        "CR_ECR": {
+          "value": 9.5,
+          "display": "9.5"
+        }
+      }
+    },
+    {
+      "model": "Cosmos3-Nano",
+      "training": "worlddojo_l0",
+      "level": "L2",
+      "scores": {
+        "SC_OSCR": {
+          "value": 31.6,
+          "display": "31.6"
+        },
+        "SC_NPE": {
+          "value": 0.1632,
+          "display": "16.3"
+        },
+        "HM_OSCR": {
+          "value": 39.6,
+          "display": "39.6"
+        },
+        "HM_ORR": {
+          "value": 7.1,
+          "display": "7.1"
+        },
+        "OG_OSCR": {
+          "value": 34.6,
+          "display": "34.6"
+        },
+        "OG_ECR": {
+          "value": 39.5,
+          "display": "39.5"
+        },
+        "CR_OSCR": {
+          "value": 26.8,
+          "display": "26.8"
+        },
+        "CR_ECR": {
+          "value": 23.5,
+          "display": "23.5"
+        }
+      }
+    },
+    {
+      "model": "BWM",
+      "training": "demo",
+      "level": "L0",
+      "scores": {
+        "SC_OSCR": {
+          "value": 55.2,
+          "display": "55.2"
+        },
+        "SC_NPE": {
+          "value": 0.0175,
+          "display": "1.8"
+        },
+        "HM_OSCR": {
+          "value": 75.7,
+          "display": "75.7"
+        },
+        "HM_ORR": {
+          "value": 94.2,
+          "display": "94.2"
+        },
+        "OG_OSCR": {
+          "value": 57.3,
+          "display": "57.3"
+        },
+        "OG_ECR": {
+          "value": 63.5,
+          "display": "63.5"
+        },
+        "CR_OSCR": {
+          "value": 44.0,
+          "display": "44.0"
+        },
+        "CR_ECR": {
+          "value": 50.0,
+          "display": "50.0"
+        }
+      }
+    },
+    {
+      "model": "BWM",
+      "training": "worlddojo_l0",
+      "level": "L0",
+      "scores": {
+        "SC_OSCR": {
+          "value": 78.1,
+          "display": "78.1"
+        },
+        "SC_NPE": {
+          "value": 0.0051,
+          "display": "0.5"
+        },
+        "HM_OSCR": {
+          "value": 91.9,
+          "display": "91.9"
+        },
+        "HM_ORR": {
+          "value": 95.8,
+          "display": "95.8"
+        },
+        "OG_OSCR": {
+          "value": 62.3,
+          "display": "62.3"
+        },
+        "OG_ECR": {
+          "value": 87.0,
+          "display": "87.0"
+        },
+        "CR_OSCR": {
+          "value": 68.8,
+          "display": "68.8"
+        },
+        "CR_ECR": {
+          "value": 83.5,
+          "display": "83.5"
+        }
+      }
+    },
+    {
+      "model": "BWM",
+      "training": "demo",
+      "level": "L1",
+      "scores": {
+        "SC_OSCR": {
+          "value": 30.2,
+          "display": "30.2"
+        },
+        "SC_NPE": {
+          "value": 0.0866,
+          "display": "8.7"
+        },
+        "HM_OSCR": {
+          "value": 67.6,
+          "display": "67.6"
+        },
+        "HM_ORR": {
+          "value": 81.5,
+          "display": "81.5"
+        },
+        "OG_OSCR": {
+          "value": 45.6,
+          "display": "45.6"
+        },
+        "OG_ECR": {
+          "value": 47.5,
+          "display": "47.5"
+        },
+        "CR_OSCR": {
+          "value": 35.8,
+          "display": "35.8"
+        },
+        "CR_ECR": {
+          "value": 18.0,
+          "display": "18.0"
+        }
+      }
+    },
+    {
+      "model": "BWM",
+      "training": "worlddojo_l0",
+      "level": "L1",
+      "scores": {
+        "SC_OSCR": {
+          "value": 36.8,
+          "display": "36.8"
+        },
+        "SC_NPE": {
+          "value": 0.0472,
+          "display": "4.7"
+        },
+        "HM_OSCR": {
+          "value": 78.1,
+          "display": "78.1"
+        },
+        "HM_ORR": {
+          "value": 98.1,
+          "display": "98.1"
+        },
+        "OG_OSCR": {
+          "value": 53.3,
+          "display": "53.3"
+        },
+        "OG_ECR": {
+          "value": 64.0,
+          "display": "64.0"
+        },
+        "CR_OSCR": {
+          "value": 46.5,
+          "display": "46.5"
+        },
+        "CR_ECR": {
+          "value": 32.0,
+          "display": "32.0"
+        }
+      }
+    },
+    {
+      "model": "BWM",
+      "training": "demo",
+      "level": "L2",
+      "scores": {
+        "SC_OSCR": {
+          "value": 21.3,
+          "display": "21.3"
+        },
+        "SC_NPE": {
+          "value": 0.1656,
+          "display": "16.6"
+        },
+        "HM_OSCR": {
+          "value": 48.7,
+          "display": "48.7"
+        },
+        "HM_ORR": {
+          "value": 86.4,
+          "display": "86.4"
+        },
+        "OG_OSCR": {
+          "value": 42.7,
+          "display": "42.7"
+        },
+        "OG_ECR": {
+          "value": 26.0,
+          "display": "26.0"
+        },
+        "CR_OSCR": {
+          "value": 25.0,
+          "display": "25.0"
+        },
+        "CR_ECR": {
+          "value": 11.0,
+          "display": "11.0"
+        }
+      }
+    },
+    {
+      "model": "BWM",
+      "training": "worlddojo_l0",
+      "level": "L2",
+      "scores": {
+        "SC_OSCR": {
+          "value": 28.2,
+          "display": "28.2"
+        },
+        "SC_NPE": {
+          "value": 0.0894,
+          "display": "8.9"
+        },
+        "HM_OSCR": {
+          "value": 62.2,
+          "display": "62.2"
+        },
+        "HM_ORR": {
+          "value": 82.8,
+          "display": "82.8"
+        },
+        "OG_OSCR": {
+          "value": 47.3,
+          "display": "47.3"
+        },
+        "OG_ECR": {
+          "value": 34.5,
+          "display": "34.5"
+        },
+        "CR_OSCR": {
+          "value": 29.7,
+          "display": "29.7"
+        },
+        "CR_ECR": {
+          "value": 7.5,
+          "display": "7.5"
+        }
+      }
+    }
+  ],
+  "compositeScore": null
+}

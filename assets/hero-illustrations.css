@@ -1,0 +1,63 @@
+.title-plate{
+  --paper-ink:#797368;--corner:16px;
+  position:relative;isolation:isolate;max-width:1112px;margin:30px auto 0;padding:34px 24px;
+  width:calc(100% - 40px);display:grid;
+  grid-template-columns:minmax(148px,178px) minmax(0,1fr) minmax(148px,178px);
+  grid-template-areas:"input title output";align-items:center;gap:18px;
+  background:
+    linear-gradient(var(--paper-ink),var(--paper-ink)) left top / var(--corner) 1px,
+    linear-gradient(var(--paper-ink),var(--paper-ink)) left top / 1px var(--corner),
+    linear-gradient(var(--paper-ink),var(--paper-ink)) right top / var(--corner) 1px,
+    linear-gradient(var(--paper-ink),var(--paper-ink)) right top / 1px var(--corner),
+    linear-gradient(var(--paper-ink),var(--paper-ink)) left bottom / var(--corner) 1px,
+    linear-gradient(var(--paper-ink),var(--paper-ink)) left bottom / 1px var(--corner),
+    linear-gradient(var(--paper-ink),var(--paper-ink)) right bottom / var(--corner) 1px,
+    linear-gradient(var(--paper-ink),var(--paper-ink)) right bottom / 1px var(--corner);
+  background-repeat:no-repeat;
+}
+.title-plate::before{content:"";position:absolute;top:0;left:24px;right:24px;height:7px;background:repeating-linear-gradient(90deg,#a7a296 0 1px,transparent 1px 40px),repeating-linear-gradient(90deg,#c1bdb4 0 1px,transparent 1px 8px) left top/100% 3px no-repeat}
+.title-plate::after{content:"";position:absolute;inset:8px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at center,var(--background) 15%,transparent 75%)}
+.title-plate .title-copy{grid-area:title;min-width:0;padding:0;text-align:center}
+.title-status{margin-bottom:20px;font:500 clamp(13px,1.15vw,15px)/1.5 var(--font-mono);color:var(--muted-foreground)}
+.title-copy .hero-name{font-size:clamp(56px,8vw,104px)}
+.title-copy .hero-subtitle{max-width:100%;margin-top:22px;font-size:clamp(21px,1.8vw,24px);font-weight:500;line-height:1.4}
+.title-input,.title-output{display:grid;gap:9px;min-width:0;font-family:var(--font-mono)}
+.title-input{grid-area:input}.title-output{grid-area:output}
+.title-arm,.title-axes{display:block;height:auto}
+.title-arm{width:93%;margin:0 0 0 auto}.title-axes{width:96px}
+.title-spec{border:1px solid #aaa496;background:var(--card);padding:8px 10px;color:var(--foreground)}
+.title-spec header{display:flex;align-items:baseline;justify-content:space-between;gap:4px;font:600 13px/1.4 var(--font-mono);letter-spacing:.02em}
+.title-spec header small,.title-telemetry{color:var(--muted-foreground);font:400 12px/1.5 var(--font-mono)}
+.title-spec p{margin:3px 0 0;font-size:14px;line-height:1.5}
+.title-spec img,.title-spec video{width:100%;aspect-ratio:2/1;display:block;object-fit:contain;margin-top:5px}
+.title-rollout progress{display:block;width:100%;height:3px;margin:6px 0 3px;appearance:none;border:0;background:#ddd8cf}
+.title-rollout progress::-webkit-progress-bar{background:#ddd8cf}.title-rollout progress::-webkit-progress-value{background:#756e5f}.title-rollout progress::-moz-progress-bar{background:#756e5f}
+.title-rollout button{min-width:32px;min-height:26px;font:400 12px var(--font-mono);text-decoration:underline;text-underline-offset:2px}
+
+.title-input .title-spec{background:transparent;border:0;padding:0}
+.title-input header{width:fit-content;border:1px dashed #a7a296;background:var(--card);padding:2px 6px;gap:12px}
+.title-input .title-state{display:flex;align-items:center;gap:8px}
+.title-input .title-state img{width:50%;height:auto;margin:0;border:1px solid var(--border)}
+.title-input .title-actions{justify-self:end}
+.title-input .title-actions p{font-family:"Work Sans",sans-serif;font-size:14px;text-wrap:balance}
+@media(min-width:981px){
+  .title-input{align-self:center;gap:12px}
+  .title-state{order:-1}
+  .title-output{gap:8px}
+}
+@media(max-width:980px){
+  .title-plate{max-width:740px;padding:28px 18px 22px;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"title title" "input output";gap:24px 20px;align-items:start}
+  .title-copy .hero-subtitle{max-width:46ch;margin-top:14px}
+  .title-status{margin-bottom:12px}
+  .title-input,.title-output{width:100%;max-width:184px}
+  .title-input{justify-self:end}.title-output{justify-self:start}
+  .title-arm,.title-axes{height:72px;width:auto;justify-self:center;margin:0}
+  .title-input .title-actions{justify-self:start}
+}
+@media(max-width:480px){
+  .title-plate{width:calc(100% - 24px);margin-top:16px;padding:22px 8px 16px;gap:20px 10px}
+  .title-status{font-size:12px;letter-spacing:0}
+  .title-spec{padding:6px}
+  .title-input .title-state{flex-wrap:wrap}
+  .title-input .title-state img{width:100%}
+}
