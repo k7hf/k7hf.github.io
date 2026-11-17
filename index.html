@@ -20,8 +20,8 @@
 <meta content="worlddojo/paper-figures/figure-01-overview.png?v=21d9a44036" property="og:image"/>
 <meta content="worlddojo/paper-figures/figure-01-overview.png?v=21d9a44036" name="twitter:image"/>
 <link rel="stylesheet" href="assets/distribution.css?v=623030077f"/>
-<link rel="stylesheet" href="assets/analysis.css?v=59bfaf757d"/>
-<link rel="stylesheet" href="assets/compare.css?v=4dda21cae5"/>
+<link rel="stylesheet" href="assets/analysis.css?v=d8b7f55e2f"/>
+<link rel="stylesheet" href="assets/compare.css?v=30df215715"/>
 <link rel="stylesheet" href="assets/hero-illustrations.css?v=878d410ef3"/>
 </head>
 <body class="bg-grid">
@@ -56,7 +56,7 @@ WorldDojo
     <progress max="164" value="0" aria-label="Rollout frame"></progress><span class="title-telemetry">BWM · t = <output>000</output> / 164</span>
   </div>
 </div>
-</section><section class="mx-auto max-w-6xl px-5 pt-14"><figure class="paper-figure"><img alt="Four complementary capabilities, three difficulty levels, and a shared evaluation pipeline for object states and interaction events." height="1206" loading="eager" src="worlddojo/paper-figures/figure-01-overview.svg?v=4296c5f3d4" width="2440"/></figure><p class="paper-tldr"><span class="eyebrow">TL;DR — </span>Given the same starting scene and robot actions, how can we tell whether a world model’s plausible-looking video captures what those actions actually caused?</p></section><section class="mx-auto max-w-6xl px-5 pt-20" id="abstract"><div class="section-heading"><span class="eyebrow">§1</span><h2>Abstract</h2></div><p class="abstract-copy">Interactive embodied world models promise scalable support for policy learning, planning, and evaluation by predicting future environment states. However, systematic evaluation of their object-state and event prediction across diverse scenarios and interactions remains limited. We introduce WorldDojo, a comprehensive benchmark centered on object states and interaction events. WorldDojo evaluates four core capabilities: Spatial Consistency, Horizon Memory, Object Generalization, and Causal Response. Each capability spans three progressive difficulty levels (L0–L2), revealing how model performance changes as challenges increase. To assess these capabilities, we measure object-state consistency, spatial localization accuracy, object reappearance, and event consistency. Extensive evaluation of leading interactive embodied world models reveals key limitations: difficulties in tracking object positions and preserving object identities under dynamic conditions, failures in predicting multi-step event propagation, and a tendency to substitute familiar counterparts for unseen objects. In conclusion, WorldDojo provides a systematic foundation for measuring and improving world models&#x27; predictive capabilities under progressively harder challenges. The benchmark, datasets and code will be released on the <a class="text-link" href="https://k7hf.github.io/">project website</a>.</p></section><section class="mx-auto max-w-6xl px-5 pt-20" id="overview"><div class="section-heading"><span class="eyebrow">§2</span><h2>Four capabilities. Increasing difficulty.</h2></div><p class="section-intro">Given the same initial observations and future robot actions, compare predicted and reference videos at the level of object states and interaction events.</p><ol class="suite-grid suite-details"><li><span class="eyebrow">01 / OSCR · NPE</span><h3>Spatial Consistency</h3><p>Maintain spatial layouts as viewpoints and objects move.</p><dl class="suite-levels"><div><dt>L0</dt><dd>Fixed layouts under changing viewpoints</dd></div><div><dt>L1</dt><dd>A single moving object</dd></div><div><dt>L2</dt><dd>Sequential movement of multiple objects</dd></div></dl></li><li><span class="eyebrow">02 / OSCR · ORR</span><h3>Horizon Memory</h3><p>Retain and update object states while targets are temporarily out of view.</p><dl class="suite-levels"><div><dt>L0</dt><dd>Simple hiding and reappearance</dd></div><div><dt>L1</dt><dd>Multiple objects or repeated occlusions and revisits</dd></div><div><dt>L2</dt><dd>Long-horizon state tracking across multi-step interactions</dd></div></dl></li><li><span class="eyebrow">03 / OSCR · ECR</span><h3>Object Generalization</h3><p>Predict object states and interactions under changes to targets and background distractors.</p><dl class="suite-levels"><div><dt>L0</dt><dd>A single varied interaction target or background distractor</dd></div><div><dt>L1</dt><dd>Multiple objects varied simultaneously</dd></div><div><dt>L2</dt><dd>Objects absent from the training set</dd></div></dl></li><li><span class="eyebrow">04 / OSCR · ECR</span><h3>Causal Response</h3><p>Predict event triggering and propagation under paired factual and counterfactual conditions.</p><dl class="suite-levels"><div><dt>L0</dt><dd>Direct trigger–response relations</dd></div><div><dt>L1</dt><dd>Multi-step event chains with interventions</dd></div><div><dt>L2</dt><dd>Multi-factor AND / OR triggering conditions</dd></div></dl></li></ol><ol class="method-steps"><li><span class="eyebrow">01</span><h3>Construct controlled interactions</h3><p>Reuse demonstrations and adapt manipulation stages to object geometry, spatial layouts, and visibility requirements. Validate physical feasibility, state changes, and event outcomes.</p></li><li><span class="eyebrow">02</span><h3>Predict future observations</h3><p>Condition each model on initial observations and a sequence of robot actions, then generate future observations for the corresponding views.</p></li><li><span class="eyebrow">03</span><h3>Evaluate states and events</h3><p>Compare task-designated object states and event outcomes against reference annotations, with dedicated localization and reappearance metrics.</p></li></ol><details class="judge-reliability" id="benchmark-coverage">
+</section><section class="mx-auto max-w-6xl px-5 pt-14"><figure class="paper-figure"><img alt="Four complementary capabilities, three difficulty levels, and a shared evaluation pipeline for object states and interaction events." height="1206" loading="eager" src="worlddojo/paper-figures/figure-01-overview.svg?v=4296c5f3d4" width="2440"/></figure></section><section class="mx-auto max-w-6xl px-5 pt-20" id="abstract"><div class="section-heading"><span class="eyebrow">§1</span><h2>Abstract</h2></div><p class="abstract-copy">Interactive embodied world models promise scalable support for policy learning, planning, and evaluation by predicting future environment states. However, systematic evaluation of their object-state and event prediction across diverse scenarios and interactions remains limited. We introduce WorldDojo, a comprehensive benchmark centered on object states and interaction events. WorldDojo evaluates four core capabilities: Spatial Consistency, Horizon Memory, Object Generalization, and Causal Response. Each capability spans three progressive difficulty levels (L0–L2), revealing how model performance changes as challenges increase. To assess these capabilities, we measure object-state consistency, spatial localization accuracy, object reappearance, and event consistency. Extensive evaluation of leading interactive embodied world models reveals key limitations: difficulties in tracking object positions and preserving object identities under dynamic conditions, failures in predicting multi-step event propagation, and a tendency to substitute familiar counterparts for unseen objects. In conclusion, WorldDojo provides a systematic foundation for measuring and improving world models&#x27; predictive capabilities under progressively harder challenges. The benchmark, datasets and code will be released on the <a class="text-link" href="https://k7hf.github.io/">project website</a>.</p></section><section class="mx-auto max-w-6xl px-5 pt-20" id="overview"><div class="section-heading"><span class="eyebrow">§2</span><h2>Four capabilities. Increasing difficulty.</h2></div><p class="section-intro">Given the same initial observations and future robot actions, compare predicted and reference videos at the level of object states and interaction events.</p><ol class="suite-grid suite-details"><li><span class="eyebrow">01 / OSCR · NPE</span><h3>Spatial Consistency</h3><p>Maintain spatial layouts as viewpoints and objects move.</p><dl class="suite-levels"><div><dt>L0</dt><dd>Fixed layouts under changing viewpoints</dd></div><div><dt>L1</dt><dd>A single moving object</dd></div><div><dt>L2</dt><dd>Sequential movement of multiple objects</dd></div></dl></li><li><span class="eyebrow">02 / OSCR · ORR</span><h3>Horizon Memory</h3><p>Retain and update object states while targets are temporarily out of view.</p><dl class="suite-levels"><div><dt>L0</dt><dd>Simple hiding and reappearance</dd></div><div><dt>L1</dt><dd>Multiple objects or repeated occlusions and revisits</dd></div><div><dt>L2</dt><dd>Long-horizon state tracking across multi-step interactions</dd></div></dl></li><li><span class="eyebrow">03 / OSCR · ECR</span><h3>Object Generalization</h3><p>Predict object states and interactions under changes to targets and background distractors.</p><dl class="suite-levels"><div><dt>L0</dt><dd>A single varied interaction target or background distractor</dd></div><div><dt>L1</dt><dd>Multiple objects varied simultaneously</dd></div><div><dt>L2</dt><dd>Objects absent from the training set</dd></div></dl></li><li><span class="eyebrow">04 / OSCR · ECR</span><h3>Causal Response</h3><p>Predict event triggering and propagation under paired factual and counterfactual conditions.</p><dl class="suite-levels"><div><dt>L0</dt><dd>Direct trigger–response relations</dd></div><div><dt>L1</dt><dd>Multi-step event chains with interventions</dd></div><div><dt>L2</dt><dd>Multi-factor AND / OR triggering conditions</dd></div></dl></li></ol><ol class="method-steps"><li><span class="eyebrow">01</span><h3>Construct controlled interactions</h3><p>Reuse demonstrations and adapt manipulation stages to object geometry, spatial layouts, and visibility requirements. Validate physical feasibility, state changes, and event outcomes.</p></li><li><span class="eyebrow">02</span><h3>Predict future observations</h3><p>Condition each model on initial observations and a sequence of robot actions, then generate future observations for the corresponding views.</p></li><li><span class="eyebrow">03</span><h3>Evaluate states and events</h3><p>Compare task-designated object states and event outcomes against reference annotations, with dedicated localization and reappearance metrics.</p></li></ol><details class="judge-reliability" id="benchmark-coverage">
 <summary>Compare benchmark coverage</summary>
 <p>The paper compares ten benchmarks. For each capability, “Task” means the benchmark defines tasks for it, “Evaluation” means it measures it, and “Both” means it does both. Test sizes use the units reported for each benchmark. WorldDojo’s 2,400 episodes here are its simulation test set.</p>
 <div class="judge-scroll" role="region" tabindex="0" aria-label="Benchmark coverage comparison"><table><thead>
@@ -118,9 +118,10 @@ WorldDojo
         .
        </p>
 </noscript>
-</section><section class="mx-auto max-w-6xl px-5 pt-20" id="real-vs-imagined" aria-labelledby="compare-title">
-  <div class="section-heading"><span class="eyebrow">§4</span><h2 id="compare-title">Real vs. imagined</h2></div>
-  <p class="section-intro" id="compare-instructions">Drag the divider to compare frames from the same moment in these qualitative examples. In LIBERO, you can also compare two BWM predictions after fine-tuning on different training data.</p>
+</section>
+<section class="mx-auto max-w-6xl px-5 pt-20" id="real-vs-imagined" aria-labelledby="compare-title">
+  <div class="section-heading"><span class="eyebrow">§4</span><h2 id="compare-title">Ground truth vs. prediction</h2></div>
+  <p class="section-intro" id="compare-instructions">Drag the divider to compare the recorded frame (GT) on the left with BWM’s prediction on the right. In LIBERO, switch the fine-tuning data to see how each setting affects the prediction of the same object at the same moment.</p>
   <div class="compare-layout">
     <div class="compare-controls">
       <fieldset data-control="environment"><legend>Environment</legend><div>
@@ -134,21 +135,20 @@ WorldDojo
         <button type="button" value="CR" aria-pressed="false">Causal Response</button>
       </div></fieldset>
       <fieldset data-control="level"><legend>Difficulty</legend><div>
-        <button type="button" value="L0" aria-pressed="true">L0</button>
+        <button type="button" value="L0" aria-pressed="false">L0</button>
         <button type="button" value="L1" aria-pressed="false">L1</button>
-        <button type="button" value="L2" aria-pressed="false">L2</button>
+        <button type="button" value="L2" aria-pressed="true">L2</button>
       </div></fieldset>
     </div>
     <figure class="compare-case">
-      <fieldset class="compare-pairs" data-control="mode"><legend>Compare frames</legend>
-        <button type="button" value="reference" aria-pressed="true">GT vs. prediction</button>
-        <button type="button" value="training" aria-pressed="false">LIBERO vs. WorldDojo L0</button>
+      <fieldset class="compare-pairs" data-control="mode"><legend>BWM fine-tuning data</legend>
+        <button type="button" value="worlddojo" aria-pressed="true">GT vs. WorldDojo L0</button>
+        <button type="button" value="libero" aria-pressed="false">GT vs. LIBERO Demo.</button>
       </fieldset>
       <div class="compare-view" aria-busy="true">
         <div class="compare-stage" hidden>
-          <div class="compare-left"><img alt="Recorded frame"><span class="compare-label">GT · Recorded</span></div>
-          <div class="compare-right"><img alt="Model prediction"><span class="compare-label">Prediction</span></div>
-          <span class="compare-marker" hidden></span>
+          <div class="compare-left"><img alt="Recorded frame"><span class="compare-marker" aria-hidden="true"></span><span class="compare-label">Ground truth</span></div>
+          <div class="compare-right"><img alt="Model prediction"><span class="compare-marker" aria-hidden="true"></span><span class="compare-label">Prediction</span></div>
           <span class="compare-rule" aria-hidden="true"><span>↔</span></span>
           <input class="compare-range" type="range" min="0" max="100" value="50" aria-label="Comparison divider" aria-describedby="compare-instructions">
         </div>
@@ -160,7 +160,7 @@ WorldDojo
 </section>
 <section class="mx-auto max-w-6xl px-5 pt-20" id="metrics"><div class="section-heading"><span class="eyebrow">§5</span><h2>Measure states and events</h2></div><p class="section-intro">Four complementary metrics evaluate corresponding predicted and reference observations. Each suite pairs OSCR with a capability-specific measure.</p><div class="metrics-grid"><article><div class="metric-top"><span class="metric-id">OSCR</span><span class="eyebrow">Higher ↑</span></div><h3>Object State Consistency Rate</h3><p>How often the target objects in a predicted view match their reference appearance, form, and pose.</p><details><summary>Definition &amp; protocol</summary><p>For each sampled timestep with at least one valid target, GPT-6-Astra judges the valid targets as a set against the reference. The protocol samples six frames per trajectory. It averages the binary judgments over eligible timesteps for each view, equally over valid views within a sample, and finally over samples.</p><code>OSCRᵥ = (1 / |Tᵥ|) Σₜ∈Tᵥ J_state(t, v)</code></details></article><article><div class="metric-top"><span class="metric-id">NPE</span><span class="eyebrow">Lower ↓</span></div><h3>Normalized Position Error</h3><p>Bounding-box center distance normalized by the image diagonal. Missing or invalid predicted boxes receive the maximum error.</p><details><summary>Definition &amp; protocol</summary><p>Average over reference-defined evaluation instances. NPE ranges from 0 to 1. The leaderboard displays NPE × 100 and ranks with unrounded values.</p><code>NPE = mean(||center(predicted box) − center(reference box)||₂ / image diagonal); invalid prediction → 1</code></details></article><article><div class="metric-top"><span class="metric-id">ORR</span><span class="eyebrow">Higher ↑</span></div><h3>Object Reappearance Rate</h3><p>The fraction of correctly hidden targets that reappear in every sampled reappearance frame.</p><details><summary>Definition &amp; protocol</summary><p>Reference videos define the hiding and reappearance phases. h_e requires absence from every sampled hiding frame; r_e requires visibility in every sampled reappearance frame. ORR is conditional on correct hiding, not all episodes.</p><code>ORR = Σ(h_e r_e) / Σh_e</code></details></article><article><div class="metric-top"><span class="metric-id">ECR</span><span class="eyebrow">Higher ↑</span></div><h3>Event Consistency Rate</h3><p>Agreement between predicted event occurrence and task expectations, counting missed events and events that should not occur.</p><details><summary>Definition &amp; protocol</summary><p>GPT-6-Astra identifies events by predicate, participants, and temporal window. Factual and counterfactual trajectories have their own expected labels.</p><code>ECR = (1 / |E|) Σ 1[predicted occurrence = expected occurrence]</code></details></article></div><details class="judge-reliability"><summary>How reliable are the automated judgments?</summary>
 <p>On predicted videos, GPT-6-Astra agrees with human consensus in 90.6% of object-state judgments and 88.0% of event judgments. Individual annotators agree with the consensus in 89.7% and 85.3% of judgments, respectively.</p>
-<div class="judge-scroll" role="region" tabindex="0" aria-label="Judge reliability comparison"><table><caption>Judge reliability (%)</caption><thead><tr><th rowspan="2" scope="col">Judge</th><th colspan="2" scope="colgroup">Reference videos<br>Accuracy</th><th colspan="2" scope="colgroup">Predicted videos<br>Agreement with humans</th></tr><tr><th scope="col">State</th><th scope="col">Event</th><th scope="col">State</th><th scope="col">Event</th></tr></thead><tbody><tr><th scope="row">Qwen3-VL-8B</th><td>99.3</td><td>75.3</td><td>84.6</td><td>60.3</td></tr><tr><th scope="row">Qwen3-VL-32B</th><td>99.9</td><td>77.7</td><td>85.9</td><td>73.8</td></tr><tr><th scope="row">Gemini-3.1-Pro</th><td>99.9</td><td>88.7</td><td>71.7</td><td>80.7</td></tr><tr><th scope="row">GPT-6-Astra</th><td>99.9</td><td>99.3</td><td>90.6</td><td>88.0</td></tr><tr><th scope="row">Human</th><td>99.9</td><td>99.9</td><td>89.7</td><td>85.3</td></tr></tbody></table></div></details></section><section class="mx-auto max-w-6xl px-5 pt-20" id="leaderboard"><div class="section-heading"><span class="eyebrow">§6</span><h2>Leaderboard</h2></div><p class="section-intro">Five models evaluated in LIBERO simulation across two fine-tuning settings and three difficulty levels. Each setting is evaluated on 200 test trajectories per suite and level. Both training conditions use fine-tuned models.</p><div class="board" data-leaderboard=""><div class="board-controls"><div class="suite-select-control"><span class="control-label" id="suite-sort-label">Sort by suite</span><select aria-label="Sort by suite" data-board-suite=""><option value="SC">Spatial Consistency</option><option value="HM">Horizon Memory</option><option value="OG">Object Generalization</option><option value="CR">Causal Response</option></select></div><label class="search-control"><span class="control-label">Find a model</span><input aria-label="Find a model" placeholder="Search model name" type="search"/></label><button class="text-button" data-clear="" type="button">Clear</button><button class="ink-button" data-csv="" type="button">Export CSV ↓</button></div><div class="board-meta"><span data-ranking-label=""></span><span aria-live="polite" data-board-status="" role="status"></span></div><p class="board-scroll-hint">Swipe to compare all 4 suites × 3 levels →</p><div aria-label="All four suites across L0, L1 and L2. Scroll horizontally; model and rank columns stay fixed." class="table-scroll" role="region" tabindex="0"><table><caption class="sr-only">All four suites and all three difficulty levels in one table. Each model and fine-tuning setting occupies one row. Click any metric column to rank entries.</caption><thead></thead><tbody></tbody></table></div><p class="board-note">All four suites and three levels are shown. The suite selector changes sorting only; click any metric column to rank its values. Medals refer to that exact column, and <span class="best-value">best values</span> are marked in each column. ↑ higher is better; ↓ lower is better. NPE is displayed ×100 and ranked before rounding. No average or composite score is used.</p><noscript><p>Enable JavaScript to view the interactive leaderboard.</p></noscript></div><a class="text-link" href="leaderboard/index.html">Open the dedicated leaderboard →</a></section><section class="mx-auto max-w-6xl px-5 pt-20" id="capabilities"><div class="section-heading"><span class="eyebrow">§7</span><h2>Capability map</h2></div><div class="capability-map" data-capability-map=""><p class="section-intro">Every model on one chart. Each profile spans eight capability measures: the farther it reaches from the center, the stronger the performance on that axis.</p><div class="map-toolbar"><div><span class="control-label">Difficulty level</span><div aria-label="Map difficulty level" class="map-levels" role="group"><button aria-pressed="true" class="ink-button ink-button-solid" data-map-level="L0" type="button">L0</button><button aria-pressed="false" class="ink-button" data-map-level="L1" type="button">L1</button><button aria-pressed="false" class="ink-button" data-map-level="L2" type="button">L2</button></div></div><div class="map-training-control"><span class="control-label" id="map-training-label">Fine-tuning data</span><select aria-label="Map fine-tuning data" data-map-training=""><option value="demo">LIBERO Demo.</option><option selected="" value="worlddojo_l0">WorldDojo L0</option></select></div><p aria-live="polite" class="map-context" data-map-context="" role="status"></p></div><div class="map-panel"><figure class="map-figure"><div data-map-chart=""></div><figcaption>Farther from the center = stronger · fixed 0–100 scale</figcaption></figure><aside aria-label="Model focus controls" class="map-sidebar"><div class="map-sidebar-title"><h3>Models</h3><button class="text-button" data-map-reset="" type="button">Show all</button></div><p class="map-instruction">Hover to preview · click to pin</p><ul class="map-model-list" data-map-models=""></ul><div class="map-detail" data-map-detail=""></div></aside></div><p class="map-note">SC: Spatial Consistency · HM: Horizon Memory · OG: Object Generalization · CR: Causal Response. Rates are percentages. The chart and model details show 1 − NPE as a percentage. Higher values indicate smaller position errors. Each axis keeps its own meaning; polygon area is not a benchmark score.</p><noscript>Enable JavaScript to explore the model capability map, or read the results in the paper.</noscript></div></section><section class="mx-auto max-w-6xl px-5 pt-20" id="analysis"><div class="section-heading"><span class="eyebrow">§8</span><h2>What the benchmark reveals</h2></div><div class="findings-grid"><article><p class="finding-stat">51.3% → 7.6%</p><h3>Event prediction breaks down as dependencies grow.</h3><p>Across five models fine-tuned on successful demonstrations, mean Causal Response ECR falls from 51.3% for direct responses to 16.2% for event chains and 7.6% for multi-factor events.</p><small>Five-model mean; official LIBERO successful-demonstration fine-tuning; Causal Response L0–L2.</small></article><article><p class="finding-stat">16.79 vs. 8.48</p><h3>Dynamic views magnify spatial errors.</h3><p>After WorldDojo-L0 fine-tuning, mean localization error for sequential object motion reaches 16.79 in the wrist-camera view versus 8.48 in the fixed view (NPE × 100), averaged over BWM and Cosmos3-Nano.</p><small>Two-model mean; WorldDojo-L0 fine-tuning; Spatial Consistency L2; NPE × 100.</small></article><article><p class="finding-stat">66.0% vs. 28.7%</p><h3>Interaction targets are harder to preserve.</h3><p>On unseen-object tasks, BWM achieves 66.0% OSCR for background objects and 28.7% for interaction targets. Cosmos3-Nano shows the same gap: 45.7% versus 23.5%.</p><small>WorldDojo-L0 fine-tuning; Object Generalization L2; object-role subsets.</small></article><article><p class="finding-stat">+26.5 → +6.0 points</p><h3>More diverse training helps, but gains shrink with difficulty.</h3><p>WorldDojo-L0 fine-tuning raises mean Causal Response ECR by 26.5 percentage points at L0, 12.9 at L1, and 6.0 at L2. Even after fine-tuning, the L2 mean reaches only 13.6%.</p><small>Five-model mean; WorldDojo-L0 versus successful-demonstration fine-tuning; Causal Response.</small></article></div><div aria-label="Paper analyses" class="figure-tabs" role="tablist"><button aria-controls="analysis-panel-0" aria-selected="true" class="ink-button" data-analysis="0" id="analysis-tab-0" role="tab" tabindex="0" type="button">Causal response</button><button aria-controls="analysis-panel-1" aria-selected="false" class="ink-button" data-analysis="1" id="analysis-tab-1" role="tab" tabindex="-1" type="button">Localization &amp; generalization</button><button aria-controls="analysis-panel-2" aria-selected="false" class="ink-button" data-analysis="2" id="analysis-tab-2" role="tab" tabindex="-1" type="button">Frame sampling</button><button aria-controls="analysis-panel-3" aria-selected="false" class="ink-button" data-analysis="3" id="analysis-tab-3" role="tab" tabindex="-1" type="button">Prediction failures</button></div><div aria-labelledby="analysis-tab-0" id="analysis-panel-0" role="tabpanel" tabindex="0"><div class="analysis-native" data-native-analysis="causal"><div class="analysis-toolbar"><div><h3>Causal response</h3><p>Compare training conditions on paired interventions, event chains and logical triggers.</p></div></div><div class="analysis-plots"></div></div></div><div aria-labelledby="analysis-tab-1" hidden="" id="analysis-panel-1" role="tabpanel" tabindex="0"><div class="analysis-native" data-native-analysis="localization"><div class="analysis-toolbar"><div><h3>Localization &amp; generalization</h3><p>Models fine-tuned on WorldDojo L0. Compare localization error by camera, object-state consistency by role, and counts of substitutions and deformations at each difficulty level.</p></div></div><div class="analysis-plots"></div></div></div><div aria-labelledby="analysis-tab-2" hidden="" id="analysis-panel-2" role="tabpanel" tabindex="0"><div class="analysis-native" data-native-analysis="sampling"><div class="analysis-toolbar"><div><h3>How many frames does OSCR need?</h3><p>Overall OSCR is 37.01% with five frames, 36.82% with six and 35.07% with ten. The six-frame protocol uses 40% fewer frames than the ten-frame protocol.</p></div></div>
+<div class="judge-scroll" role="region" tabindex="0" aria-label="Judge reliability comparison"><table><caption>Judge reliability (%)</caption><thead><tr><th rowspan="2" scope="col">Judge</th><th colspan="2" scope="colgroup">Reference videos<br>Accuracy</th><th colspan="2" scope="colgroup">Predicted videos<br>Agreement with humans</th></tr><tr><th scope="col">State</th><th scope="col">Event</th><th scope="col">State</th><th scope="col">Event</th></tr></thead><tbody><tr><th scope="row">Qwen3-VL-8B</th><td>99.3</td><td>75.3</td><td>84.6</td><td>60.3</td></tr><tr><th scope="row">Qwen3-VL-32B</th><td>99.9</td><td>77.7</td><td>85.9</td><td>73.8</td></tr><tr><th scope="row">Gemini-3.1-Pro</th><td>99.9</td><td>88.7</td><td>71.7</td><td>80.7</td></tr><tr><th scope="row">GPT-6-Astra</th><td>99.9</td><td>99.3</td><td>90.6</td><td>88.0</td></tr><tr><th scope="row">Human</th><td>99.9</td><td>99.9</td><td>89.7</td><td>85.3</td></tr></tbody></table></div></details></section><section class="mx-auto max-w-6xl px-5 pt-20" id="leaderboard"><div class="section-heading"><span class="eyebrow">§6</span><h2>Leaderboard</h2></div><p class="section-intro">Five models evaluated in LIBERO simulation across two fine-tuning settings and three difficulty levels. Each setting is evaluated on 200 test trajectories per suite and level. Both training conditions use fine-tuned models.</p><div class="board" data-leaderboard=""><div class="board-controls"><div class="suite-select-control"><span class="control-label" id="suite-sort-label">Sort by suite</span><select aria-label="Sort by suite" data-board-suite=""><option value="SC">Spatial Consistency</option><option value="HM">Horizon Memory</option><option value="OG">Object Generalization</option><option value="CR">Causal Response</option></select></div><label class="search-control"><span class="control-label">Find a model</span><input aria-label="Find a model" placeholder="Search model name" type="search"/></label><button class="text-button" data-clear="" type="button">Clear</button><button class="ink-button" data-csv="" type="button">Export CSV ↓</button></div><div class="board-meta"><span data-ranking-label=""></span><span aria-live="polite" data-board-status="" role="status"></span></div><p class="board-scroll-hint">Swipe to compare all 4 suites × 3 levels →</p><div aria-label="All four suites across L0, L1 and L2. Scroll horizontally; model and rank columns stay fixed." class="table-scroll" role="region" tabindex="0"><table><caption class="sr-only">All four suites and all three difficulty levels in one table. Each model and fine-tuning setting occupies one row. Click any metric column to rank entries.</caption><thead></thead><tbody></tbody></table></div><p class="board-note">All four suites and three levels are shown. The suite selector changes sorting only; click any metric column to rank its values. Medals refer to that exact column, and <span class="best-value">best values</span> are marked in each column. ↑ higher is better; ↓ lower is better. NPE is displayed ×100 and ranked before rounding. No average or composite score is used.</p><noscript><p>Enable JavaScript to view the interactive leaderboard.</p></noscript></div></section><section class="mx-auto max-w-6xl px-5 pt-20" id="capabilities"><div class="section-heading"><span class="eyebrow">§7</span><h2>Capability map</h2></div><div class="capability-map" data-capability-map=""><p class="section-intro">Every model on one chart. Each profile spans eight capability measures: the farther it reaches from the center, the stronger the performance on that axis.</p><div class="map-toolbar"><div><span class="control-label">Difficulty level</span><div aria-label="Map difficulty level" class="map-levels" role="group"><button aria-pressed="true" class="ink-button ink-button-solid" data-map-level="L0" type="button">L0</button><button aria-pressed="false" class="ink-button" data-map-level="L1" type="button">L1</button><button aria-pressed="false" class="ink-button" data-map-level="L2" type="button">L2</button></div></div><div class="map-training-control"><span class="control-label" id="map-training-label">Fine-tuning data</span><select aria-label="Map fine-tuning data" data-map-training=""><option value="demo">LIBERO Demo.</option><option selected="" value="worlddojo_l0">WorldDojo L0</option></select></div><p aria-live="polite" class="map-context" data-map-context="" role="status"></p></div><div class="map-panel"><figure class="map-figure"><div data-map-chart=""></div><figcaption>Farther from the center = stronger · fixed 0–100 scale</figcaption></figure><aside aria-label="Model focus controls" class="map-sidebar"><div class="map-sidebar-title"><h3>Models</h3><button class="text-button" data-map-reset="" type="button">Show all</button></div><p class="map-instruction">Hover to preview · click to pin</p><ul class="map-model-list" data-map-models=""></ul><div class="map-detail" data-map-detail=""></div></aside></div><p class="map-note">SC: Spatial Consistency · HM: Horizon Memory · OG: Object Generalization · CR: Causal Response. Rates are percentages. The chart and model details show 1 − NPE as a percentage. Higher values indicate smaller position errors. Each axis keeps its own meaning; polygon area is not a benchmark score.</p><noscript>Enable JavaScript to explore the model capability map, or read the results in the paper.</noscript></div></section><section class="mx-auto max-w-6xl px-5 pt-20" id="analysis"><div class="section-heading"><span class="eyebrow">§8</span><h2>What the benchmark reveals</h2></div><div class="findings-grid"><article><p class="finding-stat">51.3% → 7.6%</p><h3>Event prediction breaks down as dependencies grow.</h3><p>Across five models fine-tuned on successful demonstrations, mean Causal Response ECR falls from 51.3% for direct responses to 16.2% for event chains and 7.6% for multi-factor events.</p><small>Five-model mean; official LIBERO successful-demonstration fine-tuning; Causal Response L0–L2.</small></article><article><p class="finding-stat">16.79 vs. 8.48</p><h3>Dynamic views magnify spatial errors.</h3><p>After WorldDojo-L0 fine-tuning, mean localization error for sequential object motion reaches 16.79 in the wrist-camera view versus 8.48 in the fixed view (NPE × 100), averaged over BWM and Cosmos3-Nano.</p><small>Two-model mean; WorldDojo-L0 fine-tuning; Spatial Consistency L2; NPE × 100.</small></article><article><p class="finding-stat">66.0% vs. 28.7%</p><h3>Interaction targets are harder to preserve.</h3><p>On unseen-object tasks, BWM achieves 66.0% OSCR for background objects and 28.7% for interaction targets. Cosmos3-Nano shows the same gap: 45.7% versus 23.5%.</p><small>WorldDojo-L0 fine-tuning; Object Generalization L2; object-role subsets.</small></article><article><p class="finding-stat">+26.5 → +6.0 points</p><h3>More diverse training helps, but gains shrink with difficulty.</h3><p>WorldDojo-L0 fine-tuning raises mean Causal Response ECR by 26.5 percentage points at L0, 12.9 at L1, and 6.0 at L2. Even after fine-tuning, the L2 mean reaches only 13.6%.</p><small>Five-model mean; WorldDojo-L0 versus successful-demonstration fine-tuning; Causal Response.</small></article></div><div aria-label="Paper analyses" class="figure-tabs" role="tablist"><button aria-controls="analysis-panel-0" aria-selected="true" class="ink-button" data-analysis="0" id="analysis-tab-0" role="tab" tabindex="0" type="button">Causal response</button><button aria-controls="analysis-panel-1" aria-selected="false" class="ink-button" data-analysis="1" id="analysis-tab-1" role="tab" tabindex="-1" type="button">Localization &amp; generalization</button><button aria-controls="analysis-panel-2" aria-selected="false" class="ink-button" data-analysis="2" id="analysis-tab-2" role="tab" tabindex="-1" type="button">Frame sampling</button><button aria-controls="analysis-panel-3" aria-selected="false" class="ink-button" data-analysis="3" id="analysis-tab-3" role="tab" tabindex="-1" type="button">Prediction failures</button></div><div aria-labelledby="analysis-tab-0" id="analysis-panel-0" role="tabpanel" tabindex="0"><div class="analysis-native" data-native-analysis="causal"><div class="analysis-toolbar"><div><h3>Causal response</h3><p>Compare training conditions on paired interventions, event chains and logical triggers.</p></div></div><div class="analysis-plots"></div></div></div><div aria-labelledby="analysis-tab-1" hidden="" id="analysis-panel-1" role="tabpanel" tabindex="0"><div class="analysis-native" data-native-analysis="localization"><div class="analysis-toolbar"><div><h3>Localization &amp; generalization</h3><p>Models fine-tuned on WorldDojo L0. Compare localization error by camera, object-state consistency by role, and counts of substitutions and deformations at each difficulty level.</p></div></div><div class="analysis-plots"></div></div></div><div aria-labelledby="analysis-tab-2" hidden="" id="analysis-panel-2" role="tabpanel" tabindex="0"><div class="analysis-native" data-native-analysis="sampling"><div class="analysis-toolbar"><div><h3>How many frames does OSCR need?</h3><p>Overall OSCR is 37.01% with five frames, 36.82% with six and 35.07% with ten. The six-frame protocol uses 40% fewer frames than the ten-frame protocol.</p></div></div>
 <div class="sampling-layout"><div><strong>OSCR (%)</strong><svg role="img" aria-label="Overall and per-level object state consistency across one to ten sampled frames"></svg><div class="sampling-axis-title">Number of sampled frames</div></div>
 <div><dl class="sampling-values" aria-live="polite"></dl><label for="sampling-count">Sampled frames <output for="sampling-count">6 frames</output></label><input id="sampling-count" type="range" min="1" max="10" step="1" value="6"></div></div></div></div><div aria-labelledby="analysis-tab-3" hidden="" id="analysis-panel-3" role="tabpanel" tabindex="0"><div class="failure-explorer" data-failure-explorer>
   <div class="failure-tabs" role="tablist" aria-label="Prediction failure cases">
@@ -173,23 +173,23 @@ WorldDojo
     <div class="failure-summary">
       <p class="failure-meta">Spatial Consistency</p>
       <h3>The cup shifts as the camera moves</h3>
-      <p>The moving camera reveals a misshapen handle. By the final view, the predicted cup is displaced from its reference position.</p>
-      <div class="failure-key" aria-label="Frame annotations"><span>Reference target</span><span>Prediction error</span></div>
+      <p>The moving camera reveals a misshapen handle. In the final view, the cup appears in a different position than in the recording.</p>
+      <div class="failure-key" aria-label="Frame annotations"><span>Ground-truth target</span><span>Prediction error</span></div>
     </div>
     <div class="failure-environments">
       <div class="failure-environment">
         <h4>LIBERO simulation</h4>
-    <table class="failure-sequence" aria-label="LIBERO simulation, Spatial Consistency, reference and prediction at three sampled moments">
+    <table class="failure-sequence" aria-label="LIBERO simulation, Spatial Consistency, ground truth and prediction at three sampled moments">
       <thead><tr><td></td>
         <th scope="col">Initial view</th>
         <th scope="col">Camera moves</th>
         <th scope="col">Later view</th>
       </tr></thead>
       <tbody>
-        <tr class="failure-reference"><th scope="row">Reference</th>
+        <tr class="failure-reference"><th scope="row">Ground truth</th>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sc-reference-1.svg?v=b570cda620" alt="" width="384" height="384" loading="lazy"></div><span>Cup in place</span></td>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sc-reference-2.svg?v=05446a8a2e" alt="" width="384" height="384" loading="lazy"></div><span>Handle visible</span></td>
-          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sc-reference-3.svg?v=2fa10c9b42" alt="" width="384" height="384" loading="lazy"></div><span>Reference position</span></td>
+          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sc-reference-3.svg?v=2fa10c9b42" alt="" width="384" height="384" loading="lazy"></div><span>Recorded position</span></td>
         </tr>
         <tr class="failure-prediction"><th scope="row">Prediction</th>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sc-prediction-1.svg?v=1a4567edc1" alt="" width="384" height="384" loading="lazy"></div><span>Cup in place</span></td>
@@ -201,17 +201,17 @@ WorldDojo
       </div>
       <div class="failure-environment">
         <h4>Real world</h4>
-    <table class="failure-sequence" aria-label="Real world, Spatial Consistency, reference and prediction at three sampled moments">
+    <table class="failure-sequence" aria-label="Real world, Spatial Consistency, ground truth and prediction at three sampled moments">
       <thead><tr><td></td>
         <th scope="col">Initial view</th>
         <th scope="col">Camera moves</th>
         <th scope="col">Later view</th>
       </tr></thead>
       <tbody>
-        <tr class="failure-reference"><th scope="row">Reference</th>
+        <tr class="failure-reference"><th scope="row">Ground truth</th>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/real-sc-reference-1.svg?v=dff273db7a" alt="" width="384" height="384" loading="lazy"></div><span>Blue object visible</span></td>
-          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/real-sc-reference-2.svg?v=a4d26b39af" alt="" width="384" height="384" loading="lazy"></div><span>Reference position</span></td>
-          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/real-sc-reference-3.svg?v=0fec5028ae" alt="" width="384" height="384" loading="lazy"></div><span>Reference position</span></td>
+          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/real-sc-reference-2.svg?v=a4d26b39af" alt="" width="384" height="384" loading="lazy"></div><span>Recorded position</span></td>
+          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/real-sc-reference-3.svg?v=0fec5028ae" alt="" width="384" height="384" loading="lazy"></div><span>Recorded position</span></td>
         </tr>
         <tr class="failure-prediction"><th scope="row">Prediction</th>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/real-sc-prediction-1.svg?v=8cb6417371" alt="" width="384" height="384" loading="lazy"></div><span>Blue object visible</span></td>
@@ -228,19 +228,19 @@ WorldDojo
       <p class="failure-meta">Object Generalization</p>
       <h3>The bottle becomes a bowl</h3>
       <p>During manipulation, the predicted bottle takes on the shape of a bowl. The substitution persists in the following frame.</p>
-      <div class="failure-key" aria-label="Frame annotations"><span>Reference target</span><span>Prediction error</span></div>
+      <div class="failure-key" aria-label="Frame annotations"><span>Ground-truth target</span><span>Prediction error</span></div>
     </div>
     <div class="failure-environments">
       <div class="failure-environment">
         <h4>LIBERO simulation</h4>
-    <table class="failure-sequence" aria-label="LIBERO simulation, Object Generalization, reference and prediction at three sampled moments">
+    <table class="failure-sequence" aria-label="LIBERO simulation, Object Generalization, ground truth and prediction at three sampled moments">
       <thead><tr><td></td>
         <th scope="col">Initial grasp</th>
         <th scope="col">Manipulation</th>
         <th scope="col">Later view</th>
       </tr></thead>
       <tbody>
-        <tr class="failure-reference"><th scope="row">Reference</th>
+        <tr class="failure-reference"><th scope="row">Ground truth</th>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/og-reference-1.svg?v=aa5ca0586c" alt="" width="384" height="384" loading="lazy"></div><span>Bottle visible</span></td>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/og-reference-2.svg?v=08cfbdb9e8" alt="" width="384" height="384" loading="lazy"></div><span>Bottle retained</span></td>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/og-reference-3.svg?v=b3ecabb144" alt="" width="384" height="384" loading="lazy"></div><span>Bottle retained</span></td>
@@ -255,14 +255,14 @@ WorldDojo
       </div>
       <div class="failure-environment">
         <h4>Real world</h4>
-    <table class="failure-sequence" aria-label="Real world, Object Generalization, reference and prediction at three sampled moments">
+    <table class="failure-sequence" aria-label="Real world, Object Generalization, ground truth and prediction at three sampled moments">
       <thead><tr><td></td>
         <th scope="col">Initial grasp</th>
         <th scope="col">Manipulation</th>
         <th scope="col">Later view</th>
       </tr></thead>
       <tbody>
-        <tr class="failure-reference"><th scope="row">Reference</th>
+        <tr class="failure-reference"><th scope="row">Ground truth</th>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/real-og-reference-1.svg?v=0d02c36071" alt="" width="384" height="384" loading="lazy"></div><span>Pink block visible</span></td>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/real-og-reference-2.svg?v=f252ac6028" alt="" width="384" height="384" loading="lazy"></div><span>Block retained</span></td>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/real-og-reference-3.svg?v=93dee47d19" alt="" width="384" height="384" loading="lazy"></div><span>Block retained</span></td>
@@ -281,42 +281,42 @@ WorldDojo
     <div class="failure-summary">
       <p class="failure-meta">Horizon Memory</p>
       <h3>The blue ball fails to reappear</h3>
-      <p>The robot arm briefly hides the blue ball. When the arm moves away, the ball reappears in the reference but remains missing in the prediction.</p>
-      <div class="failure-key" aria-label="Frame annotations"><span>Reference target</span><span>Prediction error</span></div>
+      <p>The robot arm briefly hides the blue ball. When the arm moves away, the recording shows the ball again. It is still missing in the prediction.</p>
+      <div class="failure-key" aria-label="Frame annotations"><span>Ground-truth target</span><span>Prediction error</span></div>
     </div>
     <div class="failure-environments">
       <div class="failure-environment">
         <h4>LIBERO simulation</h4>
-    <table class="failure-sequence" aria-label="LIBERO simulation, Horizon Memory, reference and prediction at three sampled moments">
+    <table class="failure-sequence" aria-label="LIBERO simulation, Horizon Memory, ground truth and prediction at three sampled moments">
       <thead><tr><td></td>
         <th scope="col">Before occlusion</th>
         <th scope="col">During occlusion</th>
         <th scope="col">After occlusion</th>
       </tr></thead>
       <tbody>
-        <tr class="failure-reference"><th scope="row">Reference</th>
-          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-hm-reference-1.svg?v=71b546ed53" alt="" width="384" height="384" loading="lazy"></div><span>Can visible</span></td>
-          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-hm-reference-2.svg?v=0c77d063d4" alt="" width="384" height="384" loading="lazy"></div><span>Can occluded</span></td>
-          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-hm-reference-3.svg?v=161075bcc5" alt="" width="384" height="384" loading="lazy"></div><span>Can reappears</span></td>
+        <tr class="failure-reference"><th scope="row">Ground truth</th>
+          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-hm-reference-1.svg?v=71b546ed53" alt="" width="384" height="384" loading="lazy"></div><span>Cup visible</span></td>
+          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-hm-reference-2.svg?v=0c77d063d4" alt="" width="384" height="384" loading="lazy"></div><span>Cup occluded</span></td>
+          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-hm-reference-3.svg?v=161075bcc5" alt="" width="384" height="384" loading="lazy"></div><span>Cup reappears</span></td>
         </tr>
         <tr class="failure-prediction"><th scope="row">Prediction</th>
-          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-hm-prediction-1.svg?v=c67af088dc" alt="" width="384" height="384" loading="lazy"></div><span>Can visible</span></td>
-          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-hm-prediction-2.svg?v=bb72cb550e" alt="" width="384" height="384" loading="lazy"></div><span>Can occluded</span></td>
-          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-hm-prediction-3.svg?v=9cab67ee76" alt="" width="384" height="384" loading="lazy"></div><span>Can missing</span></td>
+          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-hm-prediction-1.svg?v=c67af088dc" alt="" width="384" height="384" loading="lazy"></div><span>Cup visible</span></td>
+          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-hm-prediction-2.svg?v=bb72cb550e" alt="" width="384" height="384" loading="lazy"></div><span>Cup occluded</span></td>
+          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-hm-prediction-3.svg?v=9cab67ee76" alt="" width="384" height="384" loading="lazy"></div><span>Cup missing</span></td>
         </tr>
       </tbody>
     </table>
       </div>
       <div class="failure-environment">
         <h4>Real world</h4>
-    <table class="failure-sequence" aria-label="Real world, Horizon Memory, reference and prediction at three sampled moments">
+    <table class="failure-sequence" aria-label="Real world, Horizon Memory, ground truth and prediction at three sampled moments">
       <thead><tr><td></td>
         <th scope="col">Before occlusion</th>
         <th scope="col">During occlusion</th>
         <th scope="col">After occlusion</th>
       </tr></thead>
       <tbody>
-        <tr class="failure-reference"><th scope="row">Reference</th>
+        <tr class="failure-reference"><th scope="row">Ground truth</th>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/hm-reference-1.svg?v=7867104965" alt="" width="384" height="384" loading="lazy"></div><span>Ball visible</span></td>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/hm-reference-2.svg?v=493c5decd5" alt="" width="384" height="384" loading="lazy"></div><span>Ball occluded</span></td>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/hm-reference-3.svg?v=1b9e394f69" alt="" width="384" height="384" loading="lazy"></div><span>Ball reappears</span></td>
@@ -335,50 +335,50 @@ WorldDojo
     <div class="failure-summary">
       <p class="failure-meta">Causal Response</p>
       <h3>The model predicts a lift that never happened</h3>
-      <p>The blue block stays on the table in the reference. The prediction shows the gripper lifting it.</p>
-      <div class="failure-key" aria-label="Frame annotations"><span>Reference target</span><span>Prediction error</span></div>
+      <p>Some trajectories include a feigned grasp. The gripper makes a grasping motion while the object stays on the table. Here the model predicts a lift for both the simulated can and the real blue block.</p>
+      <div class="failure-key" aria-label="Frame annotations"><span>Ground-truth target</span><span>Prediction error</span></div>
     </div>
     <div class="failure-environments">
       <div class="failure-environment">
         <h4>LIBERO simulation</h4>
-    <table class="failure-sequence" aria-label="LIBERO simulation, Causal Response, reference and prediction at three sampled moments">
+    <table class="failure-sequence" aria-label="LIBERO simulation, Causal Response, ground truth and prediction at three sampled moments">
       <thead><tr><td></td>
         <th scope="col">Before grasp</th>
         <th scope="col">Grasp attempt</th>
-        <th scope="col">After grasp</th>
+        <th scope="col">Outcome</th>
       </tr></thead>
       <tbody>
-        <tr class="failure-reference"><th scope="row">Reference</th>
+        <tr class="failure-reference"><th scope="row">Ground truth</th>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-cr-reference-1.svg?v=27d1f88bb0" alt="" width="384" height="384" loading="lazy"></div><span>Can on table</span></td>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-cr-reference-2.svg?v=c3d307d46c" alt="" width="384" height="384" loading="lazy"></div><span>Gripper at can</span></td>
-          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-cr-reference-3.svg?v=b20571b7df" alt="" width="384" height="384" loading="lazy"></div><span>Can stays down</span></td>
+          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-cr-reference-3.svg?v=b20571b7df" alt="" width="384" height="384" loading="lazy"></div><span><strong>No lift</strong> · Can stays on table</span></td>
         </tr>
         <tr class="failure-prediction"><th scope="row">Prediction</th>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-cr-prediction-1.svg?v=91807e078a" alt="" width="384" height="384" loading="lazy"></div><span>Can on table</span></td>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-cr-prediction-2.svg?v=d8a39016b5" alt="" width="384" height="384" loading="lazy"></div><span>Gripper at can</span></td>
-          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-cr-prediction-3.svg?v=8b756071f5" alt="" width="384" height="384" loading="lazy"></div><span>Can lifted</span></td>
+          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/sim-cr-prediction-3.svg?v=8b756071f5" alt="" width="384" height="384" loading="lazy"></div><span><strong>False lift</strong> · Can rises</span></td>
         </tr>
       </tbody>
     </table>
       </div>
       <div class="failure-environment">
         <h4>Real world</h4>
-    <table class="failure-sequence" aria-label="Real world, Causal Response, reference and prediction at three sampled moments">
+    <table class="failure-sequence" aria-label="Real world, Causal Response, ground truth and prediction at three sampled moments">
       <thead><tr><td></td>
         <th scope="col">Before grasp</th>
         <th scope="col">Grasp attempt</th>
-        <th scope="col">After grasp</th>
+        <th scope="col">Outcome</th>
       </tr></thead>
       <tbody>
-        <tr class="failure-reference"><th scope="row">Reference</th>
+        <tr class="failure-reference"><th scope="row">Ground truth</th>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/cr-reference-1.svg?v=4203f9f313" alt="" width="384" height="384" loading="lazy"></div><span>Block on table</span></td>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/cr-reference-2.svg?v=8fe366aee4" alt="" width="384" height="384" loading="lazy"></div><span>Gripper at block</span></td>
-          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/cr-reference-3.svg?v=8e2b6cef64" alt="" width="384" height="384" loading="lazy"></div><span>Block stays down</span></td>
+          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/cr-reference-3.svg?v=8e2b6cef64" alt="" width="384" height="384" loading="lazy"></div><span><strong>No lift</strong> · Block stays on table</span></td>
         </tr>
         <tr class="failure-prediction"><th scope="row">Prediction</th>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/cr-prediction-1.svg?v=8d65811a51" alt="" width="384" height="384" loading="lazy"></div><span>Block on table</span></td>
           <td><div class="failure-frame"><img src="worlddojo/analysis-frames/cr-prediction-2.svg?v=f0e8e96da2" alt="" width="384" height="384" loading="lazy"></div><span>Gripper at block</span></td>
-          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/cr-prediction-3.svg?v=a82bd65264" alt="" width="384" height="384" loading="lazy"></div><span>Block lifted</span></td>
+          <td><div class="failure-frame"><img src="worlddojo/analysis-frames/cr-prediction-3.svg?v=a82bd65264" alt="" width="384" height="384" loading="lazy"></div><span><strong>False lift</strong> · Block rises</span></td>
         </tr>
       </tbody>
     </table>
@@ -450,10 +450,10 @@ WorldDojo
 </div>
 </footer>
 </div>
-<script defer="" src="worlddojo/content.js?v=377108d6fe"></script><script defer="" src="worlddojo/results.js?v=416b34dbb7"></script><script defer="" src="assets/site.js?v=9dfdae5b04"></script><script defer="" src="assets/leaderboard.js?v=18390f6187"></script><script defer="" src="assets/analysis.js?v=10f6240962"></script><script defer="" src="assets/radar.js?v=ab901d9539"></script><script defer="" src="assets/select.js?v=e599cd583a"></script><script defer src="assets/distribution.js?v=c8a31a5fca"></script><script defer src="assets/analysis-charts.js?v=615e82a1cf"></script>
+<script defer="" src="worlddojo/content.js?v=377108d6fe"></script><script defer="" src="worlddojo/results.js?v=416b34dbb7"></script><script defer="" src="assets/site.js?v=9dfdae5b04"></script><script defer="" src="assets/leaderboard.js?v=18390f6187"></script><script defer="" src="assets/analysis.js?v=82313a387e"></script><script defer="" src="assets/radar.js?v=ab901d9539"></script><script defer="" src="assets/select.js?v=e599cd583a"></script><script defer src="assets/distribution.js?v=c8a31a5fca"></script><script defer src="assets/analysis-charts.js?v=615e82a1cf"></script>
 <script defer src="worlddojo/tsne/projections.js?v=aec078a18f"></script><script defer src="assets/tsne.js?v=5624de5458"></script>
-<script defer src="worlddojo/compare/cases.js?v=ce41c4822d"></script>
-<script defer src="assets/compare.js?v=bf38e75455"></script>
+<script defer src="worlddojo/compare/cases.js?v=581e0ccad3"></script>
+<script defer src="assets/compare.js?v=7cbfa72ae7"></script>
 <script defer src="assets/hero-rollout.js?v=ffbb1a486f"></script>
 </body>
 </html>

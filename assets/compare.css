@@ -11,16 +11,16 @@
 .compare-suites button{text-align:left;font-family:inherit;font-size:16px;border-left:3px solid transparent}
 .compare-suites button[aria-pressed=true]{border-left-color:#89795b}
 .compare-case{min-width:0;margin:0;padding:clamp(12px,2vw,24px)}
-.compare-view{display:grid;place-items:center;min-height:200px;background:#e9e6df}
-.compare-stage{position:relative;width:min(100%,var(--frame-width),calc(496px * var(--frame-ratio,1)));aspect-ratio:var(--frame-ratio);isolation:isolate;--split:50%}
-.compare-stage img{display:block;width:100%;height:100%;user-select:none}
+.compare-view{display:grid;place-items:center;width:min(94%,clamp(338px,64vh,620px));aspect-ratio:1;margin-inline:auto;background:#e9e6df}
+.compare-stage{position:relative;width:100%;height:100%;isolation:isolate;--split:50%}
+.compare-stage img{display:block;width:100%;height:100%;object-fit:contain;user-select:none}
 .compare-left,.compare-right{position:absolute;inset:0}
 .compare-left{clip-path:inset(0 calc(100% - var(--split)) 0 0)}
 .compare-right{clip-path:inset(0 0 0 var(--split))}
-.compare-label{position:absolute;bottom:5px;background:rgba(25,24,22,.88);color:#fffdf8;border:1px solid #fff9;padding:4px 7px;font:600 14px/1.35 "Work Sans",sans-serif;white-space:nowrap}
+.compare-label{position:absolute;bottom:calc(5px + var(--image-inset, 0%));background:rgba(25,24,22,.88);color:#fffdf8;border:1px solid #fff9;padding:4px 7px;font:600 14px/1.35 "Work Sans",sans-serif;white-space:nowrap}
 .compare-left .compare-label{left:4px}
 .compare-right .compare-label{right:4px}
-.compare-marker{position:absolute;transform:translate(-50%,-50%);width:clamp(28px,10%,60px);aspect-ratio:1;border-radius:50%;border:2px solid #fff9e9;box-shadow:0 0 0 2px #86482c,inset 0 0 0 1px #86482c}
+.compare-marker{position:absolute;transform:translate(-50%,-50%);pointer-events:none;aspect-ratio:1;border-radius:50%;border:2px solid #fff9e9;box-shadow:0 0 0 2px #86482c,inset 0 0 0 1px #86482c}
 .compare-rule{position:absolute;z-index:1;left:var(--split);top:0;bottom:0;width:2px;transform:translateX(-50%);background:white;box-shadow:0 0 2px #1a1916;pointer-events:none}
 .compare-rule span{position:absolute;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:32px;height:32px;border:1px solid #6d665b;border-radius:50%;background:#faf8f1;color:#24221d;font:18px/1 var(--font-mono)}
 .compare-range{position:absolute;z-index:2;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;touch-action:pan-y}
