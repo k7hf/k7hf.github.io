@@ -13,11 +13,11 @@
     },
     {
       "value": "2,400",
-      "label": "Test entries"
+      "label": "Simulation test trajectories"
     }
   ],
-  "statsSourceDate": "2026-11-14",
-  "statsNote": "Counts follow the supplied test-set composition figure; separate additional hard batches are not added to this total.",
+  "statsSourceDate": "2026-11-17",
+  "statsNote": "Each of the four suites contributes 200 LIBERO test trajectories at each of three difficulty levels. The real-world test set contains a further 1,600 trajectories.",
   "figures": [
     {
       "id": "framework",
@@ -37,7 +37,7 @@
       "id": "OG",
       "name": "Object Generalization",
       "color": "#00888b",
-      "description": "Evaluate whether object interactions generalize from a single familiar object to multiple familiar objects and previously unseen objects.",
+      "description": "Objects involved in the interaction and background distractors both vary. The three levels cover one changed object, several changed objects, and objects absent from training.",
       "levels": [
         "Single-object variation",
         "Multi-object variation",
@@ -50,20 +50,20 @@
       "color": "#2a5fb8",
       "description": "Evaluate whether object identities and spatial relationships remain consistent as viewpoints change and objects move.",
       "levels": [
-        "Static scene",
-        "Dynamic scene",
-        "Complex dynamic scene"
+        "Fixed layouts under changing viewpoints",
+        "Single-object motion",
+        "Sequential motion of multiple objects"
       ]
     },
     {
       "id": "HM",
       "name": "Horizon Memory",
       "color": "#ae770b",
-      "description": "Evaluate whether a model preserves object state through occlusion, repeated occlusion, and hidden-object rearrangement.",
+      "description": "Track objects while they are hidden or outside the camera view, then predict their state when they reappear.",
       "levels": [
-        "Short horizon",
-        "Medium horizon",
-        "Long horizon"
+        "Hiding and reappearance",
+        "Repeated occlusions and revisits",
+        "State tracking across multiple steps"
       ]
     },
     {
@@ -72,9 +72,9 @@
       "color": "#974c91",
       "description": "Evaluate whether predicted outcomes respond to interventions, from direct effects to multi-step physical interactions and multi-factor events.",
       "levels": [
-        "Single-step events",
-        "Multi-step events",
-        "Multi-factor composition events"
+        "Direct trigger–response events",
+        "Multi-step event chains",
+        "Multi-factor AND / OR events"
       ]
     }
   ],
@@ -370,7 +370,7 @@
       "poster": "worlddojo/posters/CR110457.webp"
     }
   ],
-  "demoNotice": "All videos on this page are recorded ground-truth demonstrations, not model predictions.",
+  "demoNotice": "The Explore the benchmark gallery shows recorded ground-truth demonstrations.",
   "links": {
     "paper": null,
     "code": null,

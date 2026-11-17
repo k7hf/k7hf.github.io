@@ -413,14 +413,14 @@ body.bg-grid{background-position:0 56px}
 }
 .physical-table {
   width: 100%;
-  min-width: 620px;
+  min-width: 480px;
   table-layout: fixed;
   border-collapse: collapse;
   font: 500 15px/1.45 var(--font-mono);
   font-variant-numeric: tabular-nums;
 }
 .physical-suite-col { width: 26%; }
-.physical-metric-col { width: 13%; }
+.physical-metric-col { width: 23%; }
 .physical-table caption {
   padding: 14px 16px;
   text-align: center;

@@ -52,7 +52,7 @@
           [82.34, 70.2, 65.95],
           [42.3, 36.46, 28.69]
         ],
-        "failure": [40.291262, 26.699029, 16.990291]
+        "failure": [[9, 14, 32], [9, 20, 54]]
       },
       {
         "view": [
@@ -63,7 +63,7 @@
           [66.58, 51.58, 45.67],
           [42.27, 33.73, 23.46]
         ],
-        "failure": [44.933921, 25.110132, 28.634361]
+        "failure": [[13, 14, 30], [13, 29, 60]]
       }
     ],
     "npeMax": 25,
@@ -178,8 +178,8 @@
     bars(spatial, levels, ['Fixed camera', 'Wrist camera'], transpose(d.view), {maximum: data.npeMax, unit: '', decimals: 2});
     const objects = card(host, 'Object consistency by role', 'OG · OSCR on background objects and interaction targets.');
     bars(objects, levels, ['Background objects', 'Interaction targets'], transpose(d.role));
-    const failures = card(host, 'Object failure modes', 'OG · Share of object failure events pooled across L0–L2.');
-    bars(failures, ['Deformation', 'Replacement', 'Disappearance'], ['Share'], d.failure.map(v => [v]));
+    const failures = card(host, 'Object failures by difficulty', 'OG · Number of object substitutions and deformations at each difficulty level.');
+    bars(failures, levels, ['Substitution', 'Deformation'], transpose(d.failure), {maximum: 68, unit: '', decimals: 0});
   }
   for (const [id, render] of [['causal', causal], ['localization', localization]]) {
     const panel = root.querySelector('[data-native-analysis="' + id + '"]');

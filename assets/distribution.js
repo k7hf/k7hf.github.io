@@ -67,7 +67,7 @@
     });
   });
 
-  // Official (non-reserve) gallery episodes, snapshot of 2026-11-16.
+  // Formal real-world test episodes per suite, in L0–L2 order.
   const realLevelCounts = [160, 160, 80];
   const suiteTotal = realLevelCounts.reduce((sum, count) => sum + count);
   suites.forEach(([suite], index) => {

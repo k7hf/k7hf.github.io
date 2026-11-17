@@ -115,6 +115,8 @@
   border: 2px solid #ee822f;
 }
 .failure-key span + span::before { border-color: #f00; }
+.failure-environments { display: grid; gap: 24px; min-width: 0; }
+.failure-environment h4 { margin: 0 0 8px; font: 600 15px/1.4 var(--font-mono, monospace); }
 .failure-sequence {
   width: 100%;
   table-layout: fixed;
