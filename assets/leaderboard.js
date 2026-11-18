@@ -29,35 +29,36 @@
     for (const suite of suites) {
       const cols = data.columns.filter(col => col.suiteCode === suite);
       const suiteHeader = document.createElement('th');
-      suiteHeader.scope = 'colgroup'; suiteHeader.colSpan = data.levels.length * cols.length;
+      suiteHeader.scope = 'colgroup'; suiteHeader.colSpan = data.levels.length;
       suiteHeader.dataset.suiteHeading = suite; suiteHeader.dataset.suite = suite;
       const suiteName = document.createElement('span'); suiteName.className = 'suite-heading-label'; suiteName.textContent = cols[0].suiteLabel;
       suiteHeader.append(suiteName);
       groups.append(suiteHeader);
       for (const level of data.levels) {
         const levelHeader = document.createElement('th');
-        levelHeader.colSpan = cols.length; levelHeader.scope = 'colgroup';
+        levelHeader.scope = 'col';
         levelHeader.dataset.suite = suite; levelHeader.dataset.level = level;
         const badge = document.createElement('span'); badge.className = 'level-badge'; badge.textContent = level;
         levelHeader.append(badge);
         if (level === 'L2') levelHeader.className = 'suite-end';
         levels.append(levelHeader);
-        for (const [index, col] of cols.entries()) {
-          const th = document.createElement('th'); th.scope = 'col';
-          th.dataset.suite = suite; th.dataset.level = level;
-          if (index === cols.length - 1) th.classList.add('level-end');
-          if (level === 'L2' && index === cols.length - 1) th.classList.add('suite-end');
+        const th = document.createElement('th'); th.scope = 'col';
+        th.dataset.suite = suite; th.dataset.level = level;
+        th.className = level === 'L2' ? 'metric-header suite-end' : 'metric-header level-end';
+        for (const col of cols) {
           const button = document.createElement('button'); button.type = 'button';
           button.dataset.sort = `${level}:${col.id}`;
-          button.textContent = `${col.label} ${col.direction === 'higher' ? '↑' : '↓'}`;
+          button.textContent = `${col.metric} ${col.direction === 'higher' ? '↑' : '↓'}`;
           button.title = `Rank by ${level} · ${col.suiteLabel} · ${col.label}`;
+          button.setAttribute('aria-label', button.title);
           button.addEventListener('click', () => {
             state.level = level; state.metric = col.id; state.suite = suite;
             board.querySelector('[data-board-suite]').value = suite;
             render();
           });
-          th.append(button); metrics.append(th);
+          th.append(button);
         }
+        metrics.append(th);
       }
     }
     head.append(groups, levels, metrics);
@@ -99,31 +100,43 @@
       mobileRank.append(rankLabel, ...[...position.childNodes].map(node => node.cloneNode(true)));
       model.prepend(mobileRank);
       tr.append(model, position);
-      for (const [index, {level, col}] of displayColumns.entries()) {
-        const td = document.createElement('td'); td.dataset.metric = col.id; td.dataset.level = level; td.dataset.suite = col.suiteCode;
-        if ((index + 1) % 2 === 0) td.classList.add('level-end');
-        if ((index + 1) % 6 === 0) td.classList.add('suite-end');
-        const value = row.levels[level][col.id];
-        const number = document.createElement('span'); number.textContent = value.display;
-        const best = (col.direction === 'higher' ? Math.max : Math.min)(...entries.map(item => item.levels[level][col.id].value));
-        if (value.value === best) number.className = 'best-value';
-        if (col.metric !== 'NPE' && value.value < 10) td.classList.add('low-rate');
-        if (level === state.level && col.id === state.metric) td.classList.add('selected-metric');
-        if (col.metric === 'NPE') td.title = `Unrounded NPE: ${value.value}; displayed ×100`;
-        td.append(number); tr.append(td);
+      for (const suite of suites) {
+        const cols = data.columns.filter(col => col.suiteCode === suite);
+        for (const level of data.levels) {
+          const td = document.createElement('td');
+          td.dataset.suite = suite; td.dataset.level = level;
+          td.className = level === 'L2' ? 'score-pair suite-end' : 'score-pair level-end';
+          for (const col of cols) {
+            const value = row.levels[level][col.id];
+            const score = document.createElement('div');
+            score.className = 'metric-value'; score.dataset.metric = col.id;
+            score.setAttribute('aria-label', `${col.label}: ${value.display}`);
+            const number = document.createElement('span'); number.textContent = value.display;
+            const best = (col.direction === 'higher' ? Math.max : Math.min)(...entries.map(item => item.levels[level][col.id].value));
+            if (value.value === best) number.className = 'best-value';
+            if (col.metric !== 'NPE' && value.value < 10) score.classList.add('low-rate');
+            if (level === state.level && col.id === state.metric) score.classList.add('selected-metric');
+            if (col.metric === 'NPE') score.title = `Unrounded NPE: ${value.value}; displayed ×100`;
+            score.append(number); td.append(score);
+          }
+          tr.append(td);
+        }
       }
       body.append(tr);
     }
     if (!displayed.length) {
       const tr = document.createElement('tr'), td = document.createElement('td');
-      td.colSpan = 2 + displayColumns.length; td.className = 'board-empty';
+      td.colSpan = 2 + suites.length * data.levels.length; td.className = 'board-empty';
       td.textContent = `No model matches “${search.value}”. Try a different name or clear the search.`;
       tr.append(td); body.append(tr);
     }
     head.querySelectorAll('[data-sort]').forEach(button => {
       const active = button.dataset.sort === `${state.level}:${state.metric}`;
       button.setAttribute('aria-pressed', String(active));
-      button.closest('th').setAttribute('aria-sort', active ? (selected.direction === 'higher' ? 'descending' : 'ascending') : 'none');
+    });
+    head.querySelectorAll('.metric-header').forEach(th => {
+      const active = th.querySelector('[aria-pressed=true]');
+      th.setAttribute('aria-sort', active ? (selected.direction === 'higher' ? 'descending' : 'ascending') : 'none');
     });
     head.querySelectorAll('[data-suite-heading]').forEach(th => th.classList.toggle('is-sort-suite', th.dataset.suiteHeading === state.suite));
     board.querySelector('[data-ranking-label]').textContent = `${selected.suiteLabel} · Ranked by ${state.level} ${selected.label} ${selected.direction === 'higher' ? '↑' : '↓'}`;
@@ -137,7 +150,9 @@
     const scroll = board.querySelector('.table-scroll');
     const cell = head.querySelector(`[data-sort="${state.level}:${state.metric}"]`).closest('th');
     const fixedWidth = head.querySelector('.model-cell').offsetWidth + head.querySelector('.rank-cell').offsetWidth;
-    scroll.scrollLeft += cell.getBoundingClientRect().left - scroll.getBoundingClientRect().left - fixedWidth - 12;
+    if (scroll.scrollWidth > scroll.clientWidth) {
+      scroll.scrollLeft += cell.getBoundingClientRect().left - scroll.getBoundingClientRect().left - fixedWidth - 12;
+    }
   });
   search.addEventListener('input', () => {state.query = search.value.trim().toLowerCase(); render();});
   board.querySelector('[data-clear]').addEventListener('click', () => {search.value = ''; state.query = ''; render(); search.focus();});

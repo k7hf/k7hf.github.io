@@ -450,3 +450,45 @@ body.bg-grid{background-position:0 56px}
   line-height: 1.6;
   color: var(--ink-soft);
 }
+
+/* Fit all suites and levels by stacking each level's two metrics. */
+.board table{min-width:920px;table-layout:fixed;font-size:15px}
+.board .model-cell{width:164px;min-width:164px;padding:5px 12px}
+.board .rank-cell{width:48px;min-width:48px;left:164px;padding:8px 4px}
+.board thead .model-cell,.board thead .rank-cell{font-size:14px}
+.board .model-name{font-size:15px;line-height:1.35;white-space:normal}
+.board .model-training{font-size:12px;line-height:1.4;margin-top:5px;white-space:normal}
+.board thead [data-suite-heading]{font-size:15px;padding:10px 5px;white-space:normal;line-height:1.35}
+.board .suite-heading-label{display:block}
+.board thead tr:nth-child(2) th{padding:4px 0}
+.board .level-badge{font-size:17px}
+.board .metric-header button{display:block;width:100%;min-width:0;padding:4px 0;font-size:12px;line-height:18px}
+.board .metric-header button+button{border-top:1px solid #c8c3ba}
+.board td.score-pair{padding:0}
+.board .metric-value{padding:3px 1px;line-height:20px}
+.board .metric-value+.metric-value{border-top:1px solid #d6d0c6}
+.board .metric-value.selected-metric{background:color-mix(in srgb,var(--suite-wash) 88%,var(--card))}
+.board .metric-value .best-value{padding:1px 3px}
+@media(min-width:1000px){
+ #leaderboard{max-width:1600px}
+ .standalone-board-section{max-width:1600px}
+ .board .table-scroll{overflow-x:visible}
+}
+@media(min-width:1400px){
+ .board table{font-size:16px}
+ .board .model-cell{width:180px;min-width:180px}
+ .board .rank-cell{left:180px}
+ .board .model-name{font-size:16px}
+ .board .model-training{font-size:13px}
+ .board .metric-header button{font-size:13px}
+}
+@media(max-width:600px){
+ .board table{min-width:1020px;font-size:16px}
+ .board .model-cell{width:148px;min-width:148px;padding:10px}
+ .board .model-name{font-size:16px}
+ .board .model-training{font-size:14px}
+ .board .metric-header button{min-height:44px;font-size:13px}
+ .board .metric-value{padding:10px 2px}
+ .board .suite-heading-label{position:static;width:auto;max-width:none;text-align:center}
+ .board .level-badge{position:static;width:auto;text-align:center}
+}
