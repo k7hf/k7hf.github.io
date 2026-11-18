@@ -451,44 +451,40 @@ body.bg-grid{background-position:0 56px}
   color: var(--ink-soft);
 }
 
-/* Fit all suites and levels by stacking each level's two metrics. */
-.board table{min-width:920px;table-layout:fixed;font-size:15px}
-.board .model-cell{width:164px;min-width:164px;padding:5px 12px}
-.board .rank-cell{width:48px;min-width:48px;left:164px;padding:8px 4px}
-.board thead .model-cell,.board thead .rank-cell{font-size:14px}
+/* One three-row group per model and fine-tuning setting. */
+.board{--identity-width:190px}
+.board table{width:100%;min-width:780px;table-layout:fixed;font-size:15px}
+.board .model-cell{width:var(--identity-width);min-width:var(--identity-width);max-width:none;padding:5px 10px}
+.board .level-cell{position:sticky;left:var(--identity-width);z-index:1;width:52px;text-align:center;background:var(--card);border-right:2px solid #8d8679}
+.board thead .level-cell{background:var(--muted)}
+.board .entry-identity{display:flex;align-items:center;gap:10px}
+.board .entry-rank{flex:0 0 30px;text-align:center;font:500 14px var(--font-mono)}
 .board .model-name{font-size:15px;line-height:1.35;white-space:normal}
-.board .model-training{font-size:12px;line-height:1.4;margin-top:5px;white-space:normal}
-.board thead [data-suite-heading]{font-size:15px;padding:10px 5px;white-space:normal;line-height:1.35}
-.board .suite-heading-label{display:block}
-.board thead tr:nth-child(2) th{padding:4px 0}
-.board .level-badge{font-size:17px}
-.board .metric-header button{display:block;width:100%;min-width:0;padding:4px 0;font-size:12px;line-height:18px}
-.board .metric-header button+button{border-top:1px solid #c8c3ba}
-.board td.score-pair{padding:0}
-.board .metric-value{padding:3px 1px;line-height:20px}
-.board .metric-value+.metric-value{border-top:1px solid #d6d0c6}
-.board .metric-value.selected-metric{background:color-mix(in srgb,var(--suite-wash) 88%,var(--card))}
-.board .metric-value .best-value{padding:1px 3px}
+.board .model-training{font-size:13px;line-height:1.4;margin-top:5px;white-space:normal}
+.board thead [data-suite-heading]{font-size:15px;padding:9px 4px;white-space:normal;line-height:1.35}
+.board thead tr:nth-child(2) th{padding:0}
+.board .metric-header button{display:block;width:100%;min-width:0;padding:6px 1px;font-size:13px;line-height:20px}
+.board tbody td,.board tbody .level-cell{padding:1px 4px;line-height:18px}
+.board tbody .level-cell{font-size:14px}
+.board tbody+tbody tr:first-child>*{border-top:1px solid #9b9489}
+.board .best-value{padding:0 3px}
+.board [data-ranking-level]{margin:0;padding:0;border:0}
+.board [data-ranking-level] button{height:44px;min-width:42px;border:1px solid var(--border);background:var(--card);font:500 15px var(--font-mono)}
+.board [data-ranking-level] button+button{border-left:0}
+.board [data-ranking-level] button[aria-pressed=true]{background:#eee8da;box-shadow:inset 0 -2px #89795b}
 @media(min-width:1000px){
- #leaderboard{max-width:1600px}
- .standalone-board-section{max-width:1600px}
- .board .table-scroll{overflow-x:visible}
-}
-@media(min-width:1400px){
- .board table{font-size:16px}
- .board .model-cell{width:180px;min-width:180px}
- .board .rank-cell{left:180px}
- .board .model-name{font-size:16px}
- .board .model-training{font-size:13px}
- .board .metric-header button{font-size:13px}
+ #leaderboard,.standalone-board-section{max-width:1600px}
 }
 @media(max-width:600px){
- .board table{min-width:1020px;font-size:16px}
- .board .model-cell{width:148px;min-width:148px;padding:10px}
- .board .model-name{font-size:16px}
- .board .model-training{font-size:14px}
- .board .metric-header button{min-height:44px;font-size:13px}
- .board .metric-value{padding:10px 2px}
+ .board{--identity-width:126px}
+ .board .model-cell{padding:6px}
+ .board .entry-identity{display:block}
+ .board .entry-rank{display:block;text-align:left}
+ .board .model-name{font-size:14px}
+ .board .model-training{font-size:12px;margin-top:2px}
+ .board .level-cell{width:40px}
  .board .suite-heading-label{position:static;width:auto;max-width:none;text-align:center}
- .board .level-badge{position:static;width:auto;text-align:center}
+ .board .metric-header button{min-height:44px}
+ .board tbody td,.board tbody .level-cell{padding:4px;line-height:19px}
+ .board-controls [data-ranking-level]{grid-column:1/-1}
 }

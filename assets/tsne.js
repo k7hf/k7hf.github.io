@@ -38,6 +38,19 @@
       svg.setAttribute('preserveAspectRatio', 'none');
       svg.setAttribute('aria-hidden', 'true');
       box.append(svg);
+      // Reuse the figure's filled bands, painting denser hit areas above lighter ones.
+      if (plot.densityBands) {
+        for (let band = 0; band < Math.max(...plot.densityBands); band++) {
+          plot.densityBands.forEach((count, series) => {
+            if (band >= count) return;
+            const region = document.createElementNS(ns, 'use');
+            region.setAttribute('href', img.src + '#density-' + series + '-' + band);
+            region.setAttribute('class', 'tsne-region');
+            region.dataset.series = series;
+            svg.append(region);
+          });
+        }
+      }
       plot.points.forEach((coords, index) => {
         const group = document.createElementNS(ns, 'g');
         group.dataset.series = index;

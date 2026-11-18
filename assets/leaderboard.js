@@ -4,7 +4,7 @@
   const board = document.querySelector('[data-leaderboard]');
   if (!data || !board) return;
   const state = {suite: 'SC', level: 'L0', metric: 'SC_OSCR', query: ''};
-  const body = board.querySelector('tbody');
+  const table = board.querySelector('table');
   const head = board.querySelector('thead');
   const search = board.querySelector('input[type="search"]');
   const entries = data.rows.filter(row => row.level === 'L0').map(row => ({
@@ -19,49 +19,36 @@
   function renderHeader() {
     head.replaceChildren();
     const groups = document.createElement('tr');
-    for (const [label, className] of [['Model / fine-tuning', 'model-cell'], ['Rank', 'rank-cell']]) {
+    for (const [label, className] of [['Model / fine-tuning', 'model-cell'], ['Level', 'level-cell']]) {
       const th = document.createElement('th');
-      th.scope = 'col'; th.rowSpan = 3; th.className = className; th.textContent = label;
+      th.scope = 'col'; th.rowSpan = 2; th.className = className; th.textContent = label;
       groups.append(th);
     }
-    const levels = document.createElement('tr');
     const metrics = document.createElement('tr');
     for (const suite of suites) {
       const cols = data.columns.filter(col => col.suiteCode === suite);
       const suiteHeader = document.createElement('th');
-      suiteHeader.scope = 'colgroup'; suiteHeader.colSpan = data.levels.length;
+      suiteHeader.scope = 'colgroup'; suiteHeader.colSpan = cols.length;
       suiteHeader.dataset.suiteHeading = suite; suiteHeader.dataset.suite = suite;
       const suiteName = document.createElement('span'); suiteName.className = 'suite-heading-label'; suiteName.textContent = cols[0].suiteLabel;
       suiteHeader.append(suiteName);
       groups.append(suiteHeader);
-      for (const level of data.levels) {
-        const levelHeader = document.createElement('th');
-        levelHeader.scope = 'col';
-        levelHeader.dataset.suite = suite; levelHeader.dataset.level = level;
-        const badge = document.createElement('span'); badge.className = 'level-badge'; badge.textContent = level;
-        levelHeader.append(badge);
-        if (level === 'L2') levelHeader.className = 'suite-end';
-        levels.append(levelHeader);
+      for (const col of cols) {
         const th = document.createElement('th'); th.scope = 'col';
-        th.dataset.suite = suite; th.dataset.level = level;
-        th.className = level === 'L2' ? 'metric-header suite-end' : 'metric-header level-end';
-        for (const col of cols) {
-          const button = document.createElement('button'); button.type = 'button';
-          button.dataset.sort = `${level}:${col.id}`;
-          button.textContent = `${col.metric} ${col.direction === 'higher' ? '↑' : '↓'}`;
-          button.title = `Rank by ${level} · ${col.suiteLabel} · ${col.label}`;
-          button.setAttribute('aria-label', button.title);
-          button.addEventListener('click', () => {
-            state.level = level; state.metric = col.id; state.suite = suite;
-            board.querySelector('[data-board-suite]').value = suite;
-            render();
-          });
-          th.append(button);
-        }
-        metrics.append(th);
+        th.dataset.suite = suite;
+        th.className = col === cols[cols.length - 1] ? 'metric-header suite-end' : 'metric-header';
+        const button = document.createElement('button'); button.type = 'button';
+        button.dataset.sort = col.id;
+        button.textContent = col.label + (col.direction === 'higher' ? ' ↑' : ' ↓');
+        button.addEventListener('click', () => {
+          state.metric = col.id; state.suite = suite;
+          board.querySelector('[data-board-suite]').value = suite;
+          render();
+        });
+        th.append(button); metrics.append(th);
       }
     }
-    head.append(groups, levels, metrics);
+    head.append(groups, metrics);
   }
   function render() {
     board.querySelector('[data-board-suite]').dispatchEvent(new Event('picker:sync'));
@@ -78,14 +65,16 @@
       return {...row, rank};
     });
     displayed = ranked.filter(row => row.model.toLowerCase().includes(state.query));
-    body.replaceChildren();
+    for (const group of Array.from(table.tBodies)) group.remove();
     for (const row of displayed) {
-      const tr = document.createElement('tr'); tr.dataset.training = row.training;
-      const model = document.createElement('th'); model.scope = 'row'; model.className = 'model-cell';
+      const group = table.createTBody();
+      const tr = group.insertRow(); tr.dataset.training = row.training;
+      const model = document.createElement('th'); model.scope = 'rowgroup'; model.rowSpan = data.levels.length; model.className = 'model-cell';
       const name = document.createElement('span'); name.className = 'model-name'; name.textContent = row.model;
       const training = document.createElement('span'); training.className = 'model-training'; training.textContent = data.training[row.training];
-      model.append(name, training);
-      const position = document.createElement('td'); position.className = 'rank-cell';
+      const position = document.createElement('span'); position.className = 'entry-rank';
+      position.title = 'Rank ' + row.rank;
+      position.setAttribute('aria-label', position.title);
       const rankText = String(row.rank).padStart(2, '0');
       if (row.rank <= 3) {
         const metal = ['gold', 'silver', 'bronze'][row.rank - 1]; tr.dataset.podium = metal;
@@ -95,43 +84,37 @@
         const disc = document.createElement('span'); disc.className = 'medal-disc'; disc.textContent = rankText;
         medal.append(disc); position.append(medal);
       } else position.textContent = rankText;
-      const mobileRank = document.createElement('span'); mobileRank.className = 'mobile-rank';
-      const rankLabel = document.createElement('span'); rankLabel.textContent = 'Rank';
-      mobileRank.append(rankLabel, ...[...position.childNodes].map(node => node.cloneNode(true)));
-      model.prepend(mobileRank);
-      tr.append(model, position);
-      for (const suite of suites) {
-        const cols = data.columns.filter(col => col.suiteCode === suite);
-        for (const level of data.levels) {
-          const td = document.createElement('td');
-          td.dataset.suite = suite; td.dataset.level = level;
-          td.className = level === 'L2' ? 'score-pair suite-end' : 'score-pair level-end';
-          for (const col of cols) {
-            const value = row.levels[level][col.id];
-            const score = document.createElement('div');
-            score.className = 'metric-value'; score.dataset.metric = col.id;
-            score.setAttribute('aria-label', `${col.label}: ${value.display}`);
-            const number = document.createElement('span'); number.textContent = value.display;
-            const best = (col.direction === 'higher' ? Math.max : Math.min)(...entries.map(item => item.levels[level][col.id].value));
-            if (value.value === best) number.className = 'best-value';
-            if (col.metric !== 'NPE' && value.value < 10) score.classList.add('low-rate');
-            if (level === state.level && col.id === state.metric) score.classList.add('selected-metric');
-            if (col.metric === 'NPE') score.title = `Unrounded NPE: ${value.value}; displayed ×100`;
-            score.append(number); td.append(score);
-          }
-          tr.append(td);
+      const identity = document.createElement('div'); identity.className = 'entry-identity';
+      const labels = document.createElement('div'); labels.append(name, training);
+      identity.append(position, labels); model.append(identity); tr.append(model);
+      for (const [index, level] of data.levels.entries()) {
+        const levelRow = index === 0 ? tr : group.insertRow();
+        const levelCell = document.createElement('th');
+        levelCell.scope = 'row'; levelCell.className = 'level-cell'; levelCell.textContent = level;
+        levelRow.append(levelCell);
+        for (const [columnIndex, col] of data.columns.entries()) {
+          const td = levelRow.insertCell(); td.dataset.suite = col.suiteCode;
+          td.dataset.level = level; td.dataset.metric = col.id;
+          if (data.columns[columnIndex + 1]?.suiteCode !== col.suiteCode) td.classList.add('suite-end');
+          const value = row.levels[level][col.id];
+          const number = document.createElement('span'); number.textContent = value.display;
+          const best = (col.direction === 'higher' ? Math.max : Math.min)(...entries.map(item => item.levels[level][col.id].value));
+          if (value.value === best) number.className = 'best-value';
+          if (col.metric !== 'NPE' && value.value < 10) td.classList.add('low-rate');
+          if (level === state.level && col.id === state.metric) td.classList.add('selected-metric');
+          if (col.metric === 'NPE') td.title = `Unrounded NPE: ${value.value}; displayed ×100`;
+          td.append(number);
         }
       }
-      body.append(tr);
     }
     if (!displayed.length) {
       const tr = document.createElement('tr'), td = document.createElement('td');
-      td.colSpan = 2 + suites.length * data.levels.length; td.className = 'board-empty';
+      td.colSpan = 2 + data.columns.length; td.className = 'board-empty';
       td.textContent = `No model matches “${search.value}”. Try a different name or clear the search.`;
-      tr.append(td); body.append(tr);
+      tr.append(td); table.createTBody().append(tr);
     }
     head.querySelectorAll('[data-sort]').forEach(button => {
-      const active = button.dataset.sort === `${state.level}:${state.metric}`;
+      const active = button.dataset.sort === state.metric;
       button.setAttribute('aria-pressed', String(active));
     });
     head.querySelectorAll('.metric-header').forEach(th => {
@@ -143,13 +126,27 @@
     board.querySelector('[data-board-status]').textContent = `${displayed.length} of ${entries.length} entries · 4 suites × 3 levels · Both fine-tuning sets`;
     board.querySelector('[data-csv]').disabled = !displayed.length;
   }
+  const rankingLevel = board.querySelector('[data-ranking-level]');
+  for (const level of data.levels) {
+    const button = document.createElement('button');
+    button.type = 'button'; button.textContent = level;
+    button.setAttribute('aria-pressed', String(level === state.level));
+    button.addEventListener('click', () => {
+      state.level = level;
+      for (const option of rankingLevel.querySelectorAll('button')) {
+        option.setAttribute('aria-pressed', String(option === button));
+      }
+      render();
+    });
+    rankingLevel.append(button);
+  }
   board.querySelector('[data-board-suite]').addEventListener('change', event => {
     state.suite = event.target.value;
     state.metric = data.columns.find(col => col.suiteCode === state.suite && col.metric === 'OSCR').id;
     render();
     const scroll = board.querySelector('.table-scroll');
-    const cell = head.querySelector(`[data-sort="${state.level}:${state.metric}"]`).closest('th');
-    const fixedWidth = head.querySelector('.model-cell').offsetWidth + head.querySelector('.rank-cell').offsetWidth;
+    const cell = head.querySelector(`[data-sort="${state.metric}"]`).closest('th');
+    const fixedWidth = head.querySelector('.model-cell').offsetWidth + head.querySelector('.level-cell').offsetWidth;
     if (scroll.scrollWidth > scroll.clientWidth) {
       scroll.scrollLeft += cell.getBoundingClientRect().left - scroll.getBoundingClientRect().left - fixedWidth - 12;
     }

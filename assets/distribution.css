@@ -53,6 +53,7 @@
 .tsne-plot svg{position:absolute;inset:0;width:100%;height:100%;fill:none}
 .tsne-plot g{opacity:0}
 .tsne-plot g.is-active{opacity:1}
+.tsne-region{opacity:0;pointer-events:fill;cursor:pointer}
 .tsne-contour{stroke-width:.65;stroke-opacity:.7;pointer-events:none}
 .tsne-dots{stroke-linecap:round;pointer-events:stroke;cursor:pointer}
 .has-highlight .tsne-plot img{opacity:.13}
