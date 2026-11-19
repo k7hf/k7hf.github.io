@@ -1,7 +1,7 @@
 .title-plate{
   --paper-ink:#797368;--corner:16px;
-  position:relative;isolation:isolate;max-width:1112px;margin:30px auto 0;padding:34px 24px;
-  width:calc(100% - 40px);display:grid;
+  position:relative;isolation:isolate;max-width:calc(var(--page-width) - 2 * var(--page-gutter));margin:30px auto 0;padding:34px 24px;
+  width:calc(100% - 2 * var(--page-gutter));display:grid;
   grid-template-columns:minmax(148px,178px) minmax(0,1fr) minmax(148px,178px);
   grid-template-areas:"input title output";align-items:center;gap:18px;
   background:
@@ -46,7 +46,7 @@
   .title-output{gap:8px}
 }
 @media(max-width:980px){
-  .title-plate{max-width:740px;padding:28px 18px 22px;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"title title" "input output";gap:24px 20px;align-items:start}
+  .title-plate{padding:28px 18px 22px;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"title title" "input output";gap:24px 20px;align-items:start}
   .title-copy .hero-subtitle{max-width:46ch;margin-top:14px}
   .title-status{margin-bottom:12px}
   .title-input,.title-output{width:100%;max-width:184px}
@@ -55,7 +55,8 @@
   .title-input .title-actions{justify-self:start}
 }
 @media(max-width:480px){
-  .title-plate{width:calc(100% - 24px);margin-top:16px;padding:22px 8px 16px;gap:20px 10px}
+  .title-copy .hero-name{font-size:clamp(43px,14vw,56px)}
+  .title-plate{margin-top:16px;padding:22px 8px 16px;gap:20px 10px}
   .title-status{font-size:12px;letter-spacing:0}
   .title-spec{padding:6px}
   .title-input .title-state{flex-wrap:wrap}

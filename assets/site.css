@@ -58,7 +58,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 }
 .demo-description{max-width:850px;line-height:1.6;margin-bottom:24px}
 .demo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.demo-filters,.demo-grid,.demo-description{width:100%;max-width:1000px;margin-inline:auto}
+.demo-filters,.demo-grid,.demo-description{width:100%}
 .demo-card{border:1px solid var(--foreground);background:var(--card);min-width:0}
 .demo-card video{display:block;width:100%;aspect-ratio:2/1;object-fit:contain;background:#151515;border-bottom:1px solid var(--border)}
 .demo-card-content{padding:10px 12px 12px}
@@ -79,7 +79,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 .section-heading{display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--foreground);padding-bottom:12px;margin-bottom:30px}
 .section-heading h2{font-size:24px;font-weight:600;line-height:1.35}
 .section-intro{font-size:17px;line-height:1.8;max-width:920px;color:var(--ink-soft);margin-bottom:28px}
-.abstract-copy{max-width:960px;margin:auto;font-size:17px;line-height:1.9;color:var(--ink-soft)}
+.abstract-copy{margin:0;font-size:17px;line-height:1.9;color:var(--ink-soft)}
 .paper-figure > a{display:block}
 .paper-figure img{display:block;width:100%;height:auto}
 .paper-figure figcaption{padding-top:12px;margin-top:12px;border-top:1px solid var(--border);font-size:15px;line-height:1.7;color:var(--muted-foreground)}
@@ -196,7 +196,7 @@ body.bg-grid{background-position:0 56px}
 @media(max-width:600px){.board-controls [data-board-suite]{width:100%}.suite-select-control{width:100%}}
 
 /* One persistent navigation bar above the title and all page content. */
-.site-topbar{max-width:1152px;height:56px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:32px}
+.site-topbar{height:56px;margin:0 auto;display:flex;align-items:center;gap:32px}
 .site-brand{flex-shrink:0;font-size:clamp(19px,2vw,24px);line-height:1.15}
 .hero-name.caret::after{margin-left:0}
 .hero-name{display:block;font-size:clamp(52px,7.1vw,88px);font-weight:700;letter-spacing:-.055em;line-height:1.05}
@@ -472,9 +472,19 @@ body.bg-grid{background-position:0 56px}
 .board [data-ranking-level] button{height:44px;min-width:42px;border:1px solid var(--border);background:var(--card);font:500 15px var(--font-mono)}
 .board [data-ranking-level] button+button{border-left:0}
 .board [data-ranking-level] button[aria-pressed=true]{background:#eee8da;box-shadow:inset 0 -2px #89795b}
+
+:root{--page-width:1600px;--page-gutter:clamp(16px,2.5vw,40px)}
 @media(min-width:1000px){
- #leaderboard,.standalone-board-section{max-width:1600px}
+  :root{--page-width:1568px;--page-gutter:clamp(25px,calc(6vw - 26px),60px)}
+  main>section#leaderboard,main>section.standalone-board-section{max-width:1600px;padding-inline:clamp(16px,2.5vw,40px)}
 }
+.site-topbar,main>section.max-w-6xl,footer>.max-w-6xl{
+  width:100%;max-width:var(--page-width);padding-inline:var(--page-gutter)
+}
+@media(min-width:1200px){
+  .abstract-copy{column-count:2;column-gap:clamp(32px,4vw,64px)}
+}
+.judge-scroll table{width:100%}
 @media(max-width:600px){
  .board{--identity-width:126px}
  .board .model-cell{padding:6px}
@@ -488,3 +498,49 @@ body.bg-grid{background-position:0 56px}
  .board tbody td,.board tbody .level-cell{padding:4px;line-height:19px}
  .board-controls [data-ranking-level]{grid-column:1/-1}
 }
+
+/* Paper Table 1, with paired task and evaluation marks. */
+#benchmark-coverage table{width:100%;line-height:1.25;font-size:15px}
+#benchmark-coverage th,#benchmark-coverage td{padding:6px 4px}
+#benchmark-coverage tbody th{padding-left:10px}
+#benchmark-coverage thead small{font-weight:400;font-size:.9em}
+#benchmark-coverage .coverage-key,#benchmark-coverage .coverage-note{max-width:none;font-size:14px;line-height:1.5}
+#benchmark-coverage .coverage-note{color:var(--muted-foreground)}
+.coverage-yes,.coverage-no{display:inline-block;min-width:1.05em;text-align:center;font:600 16px/1.2 system-ui,sans-serif}
+.coverage-yes{color:#435e46}.coverage-no{color:#746e64}
+#benchmark-coverage tbody tr:last-child{background:#e9eee4}
+#benchmark-coverage td[data-label]{white-space:nowrap}
+@media(min-width:681px) and (max-width:900px){
+ #benchmark-coverage table{font-size:14px}
+ #benchmark-coverage td,#benchmark-coverage th{padding:5px 2px}
+ #benchmark-coverage .coverage-yes,#benchmark-coverage .coverage-no{min-width:.92em;font-size:15px}
+}
+@media(max-width:680px){
+ #benchmark-coverage table,#benchmark-coverage tbody{display:block}
+ #benchmark-coverage thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ #benchmark-coverage tbody{border:1px solid var(--border)}
+ #benchmark-coverage tbody tr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:8px;row-gap:6px}
+ #benchmark-coverage tbody tr+tr{border-top:1px solid var(--border)}
+ #benchmark-coverage tbody th,#benchmark-coverage tbody td{border:0;padding:2px}
+ #benchmark-coverage tbody th{grid-column:1/3}
+ #benchmark-coverage .coverage-size{grid-column:3/5;text-align:right}
+ #benchmark-coverage td[data-label]::before{content:attr(data-label);display:block;font:500 12px/1.4 var(--font-mono)}
+ #benchmark-coverage td[data-label="SC"]{grid-column:1}
+}
+
+/* Coverage table groups and suite colors. */
+#benchmark-coverage [data-band="Dataset"]{--band:#efe7d9;--accent:#9a8057}
+#benchmark-coverage [data-band="Protocol"]{--band:#e0e9e9;--accent:#687f80}
+#benchmark-coverage [data-band="Capability"]{--band:#e5e7e0;--accent:#78856d}
+#benchmark-coverage [data-band="Metrics"]{--band:#e7e3ee;--accent:#877394}
+#benchmark-coverage [data-band="Domain"]{--band:#e8e5dc;--accent:#8c826c}
+#benchmark-coverage [data-band="SC"]{--band:#e1eade;--accent:#71836a}
+#benchmark-coverage [data-band="HM"]{--band:#dfe8f0;--accent:#667e94}
+#benchmark-coverage [data-band="OG"]{--band:#efe5d4;--accent:#9a8057}
+#benchmark-coverage [data-band="CR"]{--band:#e9e0ed;--accent:#89708e}
+#benchmark-coverage thead [data-band]{background:var(--band)}
+#benchmark-coverage thead tr:first-child [data-band]{border-top:3px solid var(--accent)}
+#benchmark-coverage tbody td[data-band]{background:color-mix(in srgb,var(--band) 42%,var(--card))}
+#benchmark-coverage tbody tr:last-child td[data-band]{background:color-mix(in srgb,var(--band) 80%,var(--card))}
+#benchmark-coverage tbody tr:last-child th{box-shadow:inset 3px 0 #71836a;font-weight:700}
+@media(max-width:680px){#benchmark-coverage td[data-band]{border-radius:3px} #benchmark-coverage tbody tr{column-gap:3px}}
