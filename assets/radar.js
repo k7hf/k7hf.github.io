@@ -76,7 +76,31 @@
   }
   function pin(model) {state.pinned = state.pinned === model ? null : model; focusModel();}
   function clearFocus() {state.pinned = null; state.hovered = null; state.focused = null; focusModel();}
+  function nearestModel(event, profiles) {
+    const matrix = svg.getScreenCTM();
+    const pointer = new DOMPoint(event.clientX, event.clientY).matrixTransform(matrix.inverse());
+    const scale = Math.hypot(matrix.a, matrix.b);
+    const reach = event.pointerType === 'touch' ? 22 : 15;
+    let nearest = null, best = Infinity;
+    for (const [model, vertices] of profiles) {
+      let distance = Infinity;
+      let a = vertices[vertices.length - 1];
+      for (const b of vertices) {
+        const dx = b.x - a.x, dy = b.y - a.y;
+        const lengthSquared = dx * dx + dy * dy;
+        const t = lengthSquared ? Math.max(0, Math.min(1, ((pointer.x - a.x) * dx + (pointer.y - a.y) * dy) / lengthSquared)) : 0;
+        distance = Math.min(distance, Math.hypot(pointer.x - a.x - t * dx, pointer.y - a.y - t * dy));
+        a = b;
+      }
+      const pixels = distance * scale;
+      // Keep a steady preview where two outlines nearly coincide.
+      const priority = pixels - (model === state.hovered ? 1.5 : 0);
+      if (pixels <= reach && priority < best) {nearest = model; best = priority;}
+    }
+    return nearest;
+  }
   function renderChart() {
+    const profiles = new Map();
     svg = node('svg', {viewBox: '0 -12 560 544', role: 'group', 'aria-label': `${state.level}, ${data.training[state.training]}: eight capability measures; farther from the center is stronger`});
     const grid = node('g', {'aria-hidden': 'true'});
     for (const value of [25, 50, 75, 100]) {
@@ -103,9 +127,7 @@
         const [x, y] = point(index, radius * value / 100);
         group.append(node('circle', {cx: x, cy: y, r: 3, class: 'map-point', 'data-metric': data.columns[index].id, 'data-value': value}));
       });
-      group.addEventListener('pointerenter', () => {state.hovered = model.name; focusModel();});
-      group.addEventListener('pointerleave', () => {state.hovered = null; focusModel();});
-      group.addEventListener('click', () => pin(model.name));
+      profiles.set(model.name, Array.from(shape.points));
       shape.addEventListener('focus', () => {state.focused = shape.matches(':focus-visible') ? model.name : null; focusModel();});
       shape.addEventListener('blur', () => {state.focused = null; focusModel();});
       shape.addEventListener('keydown', event => {
@@ -113,6 +135,23 @@
       });
       svg.append(group);
     }
+    function preview(model) {
+      svg.style.cursor = model ? 'pointer' : '';
+      if (state.hovered === model) return;
+      state.hovered = model;
+      focusModel();
+    }
+    svg.addEventListener('pointermove', event => {
+      if (event.pointerType !== 'touch') preview(nearestModel(event, profiles));
+    });
+    svg.addEventListener('pointerleave', () => preview(null));
+    svg.addEventListener('click', event => {
+      const model = event.detail === 0 ? event.target.closest('.map-profile')?.dataset.model : nearestModel(event, profiles);
+      if (model) {
+        svg.querySelector(`.map-profile[data-model="${model}"] .map-shape`).focus({preventScroll: true});
+        pin(model);
+      }
+    });
     root.querySelector('[data-map-chart]').replaceChildren(svg);
     root.querySelector('[data-map-context]').textContent = `${state.level} · ${data.training[state.training]} · 5 models`;
     root.querySelectorAll('[data-map-level]').forEach(button => {

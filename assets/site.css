@@ -544,3 +544,20 @@ body.bg-grid{background-position:0 56px}
 #benchmark-coverage tbody tr:last-child td[data-band]{background:color-mix(in srgb,var(--band) 80%,var(--card))}
 #benchmark-coverage tbody tr:last-child th{box-shadow:inset 3px 0 #71836a;font-weight:700}
 @media(max-width:680px){#benchmark-coverage td[data-band]{border-radius:3px} #benchmark-coverage tbody tr{column-gap:3px}}
+
+/* Figure 1 wordmark sits between the page grid and the content. */
+body.bg-grid{isolation:isolate}
+body.bg-grid::before{
+  content:"";
+  position:fixed;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:min(92vw,1040px);
+  aspect-ratio:3 / 1;
+  background:url("worlddojo-wordmark.png") center / contain no-repeat;
+  opacity:.105;
+  filter:saturate(.65);
+  pointer-events:none;
+  z-index:-1;
+}
